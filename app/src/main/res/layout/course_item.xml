@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Udacity_Course_Item"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/course_image"
+        android:layout_width="130dp"
+        android:layout_height="85dp"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/course_test_image"
+        />
+
+    <LinearLayout
+        style="@style/Udacity_Course_Item_Inner_Content"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/course_title"
+            style="@style/Udacity_Course_Item_Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Analyze Data with Hadoop and MapReduce"
+            />
+        <TextView
+            android:id="@+id/course_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="3 weeks"
+            />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#eeeeee"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/course_level"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                tools:text="BEGGINER"
+                />
+            <TextView
+                android:id="@+id/course_new_release"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                tools:text="new"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
