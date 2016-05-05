@@ -22,7 +22,6 @@ public class DetailActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
-
         ImageView imageView = (ImageView) view.findViewById(R.id.detail_course_image);
         Picasso.with(getContext()).load(R.drawable.course_test_image).into(imageView);
 
