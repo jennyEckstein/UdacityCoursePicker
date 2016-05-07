@@ -7,12 +7,11 @@
     tools:context="com.jennyeckstein.udacitycoursepicker.DetailActivityFragment"
     tools:showIn="@layout/activity_detail">
 
-    <ImageView
-        android:id="@+id/detail_course_image"
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/course_test_image"
-        />
+        android:layout_height="wrap_content"
+        android:text="@string/lorem_ipsum_test"
+        android:layout_margin="16dp"/>
 
 </FrameLayout>
