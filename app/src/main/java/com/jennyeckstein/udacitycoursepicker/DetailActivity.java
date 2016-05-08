@@ -7,8 +7,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.ActionProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.transition.Fade;
-import android.transition.TransitionInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +22,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        setupWindowAnimations();
+        //setupWindowAnimations();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,13 +39,6 @@ public class DetailActivity extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
-    }
-
-    private void setupWindowAnimations() {
-        Fade fade = (Fade) TransitionInflater.from(this).inflateTransition(R.transition.activity_fade);
-        getWindow().setEnterTransition(fade);
     }
 
     @Override

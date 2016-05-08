@@ -5,19 +5,26 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.transition.Fade;
-import android.transition.TransitionInflater;
+import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
+    private ViewGroup viewGroup;
+    private View listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setupWindowAnimations();
+       // setupWindowAnimations();
+
+       // this.viewGroup = (ViewGroup) findViewById(R.id.container_main);
+       // viewGroup.setOnClickListener(this);
+
+      //  this.listView = findViewById(R.id.courseView);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -30,11 +37,8 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
 
-    private void setupWindowAnimations() {
-        Fade slide = (Fade) TransitionInflater.from(this).inflateTransition(R.transition.activity_fade);
-        getWindow().setExitTransition(slide);
+        getWindow().setExitTransition(new Explode());
     }
 
     @Override

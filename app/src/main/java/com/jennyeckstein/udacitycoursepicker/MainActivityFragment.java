@@ -1,5 +1,6 @@
 package com.jennyeckstein.udacitycoursepicker;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 public class MainActivityFragment extends Fragment {
 
     private static final String LOG_TAG = MainActivityFragment.class.getSimpleName();
+    private View view;
 
     public MainActivityFragment() {
     }
@@ -23,14 +25,16 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        this.view = inflater.inflate(R.layout.fragment_main, container, false);
         ListView listView = (ListView) view.findViewById(R.id.courseView);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle();
+
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
-                startActivity(intent);
+                getActivity().startActivity(intent,bundle);
             }
         });
 
