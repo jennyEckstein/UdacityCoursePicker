@@ -3,6 +3,10 @@ package com.jennyeckstein.udacitycoursepicker;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +31,6 @@ public class UdacityContentAsyncTask extends AsyncTask {
         String coursesJsonString = null;
 
         try{
-            Log.v(LOG_TAG, "EXECUTING inside");
             URL url = new URL("https://www.udacity.com/public-api/v0/courses");
             urlConnection = (HttpsURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
@@ -71,6 +74,25 @@ public class UdacityContentAsyncTask extends AsyncTask {
     }
 
     private void parseJsonString(String jsonString){
-        //TODO: implement parse
+        final String COURSES = "courses";
+        final String KEY = "key";
+        final String TITLE = "title";
+
+        try{
+            JSONObject courseObject  = new JSONObject(jsonString);
+            JSONArray jsonArray = courseObject.getJSONArray(COURSES);
+
+            for(int i = 0; i < jsonArray.length(); i++){
+                JSONObject object = jsonArray.getJSONObject(i);
+                String key = object.getString(KEY);
+                String title = object.getString(TITLE);
+                Log.v(LOG_TAG, key + " - " + title);
+            }
+
+
+        }catch (JSONException e) {
+        Log.e(LOG_TAG, e.getMessage(), e);
+        e.printStackTrace();
+    }
     }
 }
