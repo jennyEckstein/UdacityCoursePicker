@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -45,13 +46,31 @@ public class UdacityContentAsyncTask extends AsyncTask {
                 return null;
             }
             coursesJsonString = buffer.toString();
-            Log.v(LOG_TAG, coursesJsonString);
+            //Log.v(LOG_TAG, coursesJsonString);
+            parseJsonString(coursesJsonString);
 
 
-        }catch(Exception e){
-            Log.v(LOG_TAG, e.getMessage());
+        }catch(IOException e){
+            Log.e(LOG_TAG, "Error", e);
+            return null;
+        }
+        finally {
+            if(urlConnection  != null){
+                urlConnection.disconnect();
+            }
+            if(reader  != null){
+                try{
+                    reader.close();
+                }catch(final IOException e){
+                    Log.e(LOG_TAG, "Error closing stream", e);
+                }
+            }
         }
 
         return null;
+    }
+
+    private void parseJsonString(String jsonString){
+        //TODO: implement parse
     }
 }
