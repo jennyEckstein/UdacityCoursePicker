@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,12 +14,17 @@ import android.view.ViewGroup;
 
 public class MainActivity extends AppCompatActivity{
 
+    public static final String LOG_TAG = MainActivity.class.getSimpleName();
+
     private ViewGroup viewGroup;
     private View listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        UdacityContentAsyncTask loadData = new UdacityContentAsyncTask();
+        loadData.execute();
+        Log.v(LOG_TAG, "EXECUTING");
        // setupWindowAnimations();
 
        // this.viewGroup = (ViewGroup) findViewById(R.id.container_main);
