@@ -17,6 +17,21 @@ public class CourseContract {
     public static final String PATH_COURSE_INSTRUCTOR = "course_instructor";
     public static final String PATH_RELATED_COURSES = "related_courses";
 
+    public static final class Instructor implements BaseColumns{
+
+        public static final String CONTENT_DIR_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_INSTRUCTOR;
+        public static final String CONTENT_iTEM_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_INSTRUCTOR;
+
+        public static final String TABLE_NAME = "instructor";
+
+        public static final String ID = "id";
+        public static final String NAME = "name";
+        public static final String BIO = "bio";
+        public static final String IMAGE = "image";
+    }
+
     public static final class Course implements BaseColumns{
 
         public static final String CONTENT_DIR_TYPE =
@@ -50,10 +65,6 @@ public class CourseContract {
         public static final String EXPECTED_DURATION_UNIT = "expected_duration_unit";
         public static final String SUMMARY = "summary";
         public static final String EXPECTED_DURATION = "expected_duration";
-
-
-
-
     }
 
 
