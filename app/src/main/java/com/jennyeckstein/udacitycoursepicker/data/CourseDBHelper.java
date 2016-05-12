@@ -23,8 +23,14 @@ public class CourseDBHelper extends SQLiteOpenHelper{
                 CourseContract.Instructor.ID + " INTEGER PRIMARY KEY, " +
                 CourseContract.Instructor.NAME + " TEXT NOT NULL, " +
                 CourseContract.Instructor.BIO + " TEXT, " +
-                CourseContract.Instructor.IMAGE + " TEXT)";
+                CourseContract.Instructor.IMAGE + " TEXT);";
 
+        final String SQL_CREATE_COURSE_INSTRUCTOR_TABLE = "CREATE TABLE " + CourseContract.Course_Instructor.TABLE_NAME + " (" +
+                CourseContract.Course_Instructor.COURSE_ID + " INTEGER NOT NULL, " +
+                CourseContract.Course_Instructor.INSTRUCTOR_ID + " INTEGER NOT NULL, " +
+                " FOREIGN KEY (" + CourseContract.Course_Instructor.COURSE_ID + ") REFERENCES " +
+                CourseContract.Course_Instructor.TABLE_NAME + " (" + CourseContract.Course.COURSE_ID + ")"+
+                ");";
     }
 
     @Override

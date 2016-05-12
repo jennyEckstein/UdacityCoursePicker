@@ -66,6 +66,7 @@ public class CourseContract {
 
         public static final String TABLE_NAME = "course";
 
+        public static final String COURSE_ID = "course_id";
         public static final String SUBTITLE = "subtitle";
         public static final String KEY = "key";
         public static final String IMAGE = "image";
