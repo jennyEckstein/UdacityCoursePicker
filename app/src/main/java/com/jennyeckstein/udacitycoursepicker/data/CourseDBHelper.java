@@ -19,6 +19,12 @@ public class CourseDBHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        final String SQL_CREATE_INSTRUCTOR_TABLE = "CREATE TABLE " + CourseContract.Instructor.TABLE_NAME + " (" +
+                CourseContract.Instructor.ID + " INTEGER PRIMARY KEY, " +
+                CourseContract.Instructor.NAME + " TEXT NOT NULL, " +
+                CourseContract.Instructor.BIO + " TEXT, " +
+                CourseContract.Instructor.IMAGE + " TEXT)";
+
     }
 
     @Override
