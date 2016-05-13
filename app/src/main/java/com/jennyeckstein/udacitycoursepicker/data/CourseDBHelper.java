@@ -36,5 +36,10 @@ public class CourseDBHelper extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+        db.execSQL("DROP TABLE IF EXISTS " + CourseContract.Course.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + CourseContract.Course_Instructor.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + CourseContract.Instructor.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + CourseContract.Related_Courses.TABLE_NAME);
+        onCreate(db);
     }
 }
