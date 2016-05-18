@@ -66,7 +66,7 @@ public class CourseContract {
 
         public static final String TABLE_NAME = "course";
 
-        public static final String COURSE_ID = "course_id";
+       // public static final String COURSE_ID = "course_id";
         public static final String SUBTITLE = "subtitle";
         public static final String KEY = "key";
         public static final String IMAGE = "image";
@@ -88,9 +88,8 @@ public class CourseContract {
         public static final String SLUG = "slug";
         public static final String STARTER = "starter";
         public static final String LEVEL = "level";
-        public static final String EXPECTED_DURATION_UNIT = "expected_duration_unit";
         public static final String SUMMARY = "summary";
-        public static final String EXPECTED_DURATION = "expected_duration";
+        public static final String DURATION_IN_HOURSE = "";
     }
 
 
