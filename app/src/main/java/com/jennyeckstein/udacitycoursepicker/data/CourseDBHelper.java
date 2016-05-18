@@ -48,6 +48,32 @@ public class CourseDBHelper extends SQLiteOpenHelper{
 
         Log.v(LOG_TAG, SQL_CREATE_COURSE_INSTRUCTOR_TABLE);
 
+
+        final String SQL_CREATE_COURSE_TABLE = "CREATE TABLE " + CourseContract.Course.TABLE_NAME + " (" +
+                CourseContract.Course.SUBTITLE + " TEXT, " +
+                CourseContract.Course.KEY + " TEXT, " +
+                CourseContract.Course.IMAGE + " TEXT, " +
+                CourseContract.Course.EXPECTED_LEARNING + " TEXT, " +
+                CourseContract.Course.FEATURED + " BOOLEAN, " +
+                CourseContract.Course.PROJECT_NAME + " TEXT, " +
+                CourseContract.Course.TITLE + " TEXT, " +
+                CourseContract.Course.REQUIRED_KNOWLEDGE + " TEXT, " +
+                CourseContract.Course.SYLLABUS + " TEXT, " +
+                CourseContract.Course.NEW_RELEASE + " BOOLEAN, " +
+                CourseContract.Course.HOMEPAGE + " TEXT, " +
+                CourseContract.Course.PROJECT_DESCRIPTION + " TEXT, " +
+                CourseContract.Course.FULL_COURSE_AVAILABLE + " BOOLEAN, " +
+                CourseContract.Course.FAQ + " TEXT, " +
+                CourseContract.Course.BANNER_IMAGE + " TEXT, " +
+                CourseContract.Course.SHORT_SUMMARY + " TEXT, " +
+                CourseContract.Course.SLUG + " TEXT, " +
+                CourseContract.Course.STARTER + " BOOLEAN, " +
+                CourseContract.Course.LEVEL + " TEXT, " +
+                CourseContract.Course.DURATION_IN_HOURSE + " INTEGER, " +
+                CourseContract.Course.SUMMARY + " TEXT);";
+        
+        Log.v(LOG_TAG, SQL_CREATE_COURSE_TABLE);
+
     }
 
     @Override
