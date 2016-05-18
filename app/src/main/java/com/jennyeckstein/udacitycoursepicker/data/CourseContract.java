@@ -29,7 +29,6 @@ public class CourseContract {
         public static final String RELATED_COURSE_ID = "related_course_id";
     }
 
-
     public static final class Course_Instructor implements BaseColumns{
         public static final String CONTENT_DIR_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_COURSE_INSTRUCTOR;
