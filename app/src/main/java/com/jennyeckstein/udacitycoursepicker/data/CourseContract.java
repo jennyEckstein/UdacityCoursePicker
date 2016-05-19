@@ -1,6 +1,7 @@
 package com.jennyeckstein.udacitycoursepicker.data;
 
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -18,6 +19,10 @@ public class CourseContract {
     public static final String PATH_RELATED_COURSES = "related_courses";
 
     public static final class Related_Courses implements BaseColumns{
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_RELATED_COURSES).build();
+
         public static final String CONTENT_DIR_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_RELATED_COURSES;
         public static final String CONTENT_iTEM_TYPE =
@@ -30,6 +35,10 @@ public class CourseContract {
     }
 
     public static final class Course_Instructor implements BaseColumns{
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_COURSE_INSTRUCTOR).build();
+
         public static final String CONTENT_DIR_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_COURSE_INSTRUCTOR;
         public static final String CONTENT_iTEM_TYPE =
@@ -43,9 +52,12 @@ public class CourseContract {
 
     public static final class Instructor implements BaseColumns{
 
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_INSTRUCTOR).build();
+
         public static final String CONTENT_DIR_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_INSTRUCTOR;
-        public static final String CONTENT_iTEM_TYPE =
+        public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_INSTRUCTOR;
 
         public static final String TABLE_NAME = "instructor";
@@ -54,6 +66,10 @@ public class CourseContract {
         public static final String NAME = "name";
         public static final String BIO = "bio";
         public static final String IMAGE = "image";
+
+        public static Uri buildInstructorWithId(int id){
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
     }
 
     public static final class Course implements BaseColumns{
