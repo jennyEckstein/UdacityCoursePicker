@@ -33,9 +33,27 @@ public class TestProvider extends AndroidTestCase {
     public void testGetType(){
         String type;
         type = mContext.getContentResolver().getType(CourseContract.Course.CONTENT_URI);
-        assertEquals("Error: the Course CONTENT_URI should return Course.CONTENT_DIR_TYPE", CourseContract.Course.CONTENT_DIR_TYPE, type);
+        assertEquals("Error: the Course CONTENT_URI should return Course.CONTENT_DIR_TYPE",
+                CourseContract.Course.CONTENT_DIR_TYPE, type);
 
         type = mContext.getContentResolver().getType(CourseContract.Course.buildMovieWithId("ud171"));
-        assertEquals("Error: the Course with ID CONTENT_URI should return Course.CONTENT_ITEM_TYPE", CourseContract.Course.CONTENT_ITEM_TYPE, type);
+        assertEquals("Error: the Course with ID CONTENT_URI should return Course.CONTENT_ITEM_TYPE",
+                CourseContract.Course.CONTENT_ITEM_TYPE, type);
+
+        type = mContext.getContentResolver().getType(CourseContract.Instructor.CONTENT_URI);
+        assertEquals("Error: the Instructor CONTENT_URI should return Instructor.CONTENT_DIR_TYPE",
+                CourseContract.Instructor.CONTENT_DIR_TYPE, type);
+
+        type = mContext.getContentResolver().getType(CourseContract.Instructor.buildInstructorWithId(123));
+        assertEquals("Error: the Instructor with Id CONTENT_URI should return Instructor.CONTENT_ITEM_TYPE",
+                CourseContract.Instructor.CONTENT_ITEM_TYPE, type);
+
+        type = mContext.getContentResolver().getType(CourseContract.Related_Courses.CONTENT_URI);
+        assertEquals("Error: the Related_Courses CONTENT_URI should return Related_Courses.CONTENT_DIR_TYPE",
+                CourseContract.Related_Courses.CONTENT_DIR_TYPE, type);
+
+        type = mContext.getContentResolver().getType(CourseContract.Course_Instructor.CONTENT_URI);
+        assertEquals("Error: the Course_Instructor CONTENT_URI should return Course_Instructor.CONTENT_DIR_TYPE",
+                CourseContract.Course_Instructor.CONTENT_DIR_TYPE, type);
     }
 }
