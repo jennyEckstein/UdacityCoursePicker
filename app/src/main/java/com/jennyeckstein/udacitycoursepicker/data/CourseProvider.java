@@ -14,6 +14,7 @@ public class CourseProvider extends ContentProvider {
 
     private static final String LOG_TAG = CourseProvider.class.getSimpleName();
 
+    private CourseDBHelper courseDBHelper;
     private static final UriMatcher uriMathcher = buildUriMatcher();
 
     static final int COURSE = 100;
@@ -70,7 +71,8 @@ public class CourseProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        return false;
+        courseDBHelper = new CourseDBHelper(getContext());
+        return true;
     }
 
     @Nullable
