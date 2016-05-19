@@ -78,7 +78,78 @@ public class CourseProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        return null;
+
+        Cursor cursor;
+        switch(uriMathcher.match(uri)){
+            case COURSE:
+                cursor = courseDBHelper.getReadableDatabase().query(
+                        CourseContract.Course.TABLE_NAME,
+                        null,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+
+
+            case COURSE_WITH_ID:
+                cursor = courseDBHelper.getReadableDatabase().query(
+                        CourseContract.Course.TABLE_NAME,
+                        null,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+
+            case INSTRUCTOR:
+                cursor = courseDBHelper.getReadableDatabase().query(
+                        CourseContract.Instructor.TABLE_NAME,
+                        null,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+            case INSTRUCTOR_WITH_ID:
+                cursor = courseDBHelper.getReadableDatabase().query(
+                        CourseContract.Instructor.TABLE_NAME,
+                        null,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+
+            case RELATED_COURSES:
+                cursor = courseDBHelper.getReadableDatabase().query(
+                        CourseContract.Related_Courses.TABLE_NAME,
+                        null,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+
+            case COURSE_INSTRUCTOR:
+                cursor = courseDBHelper.getReadableDatabase().query(
+                        CourseContract.Course_Instructor.TABLE_NAME,
+                        null,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+
+            default:
+                throw new UnsupportedOperationException("Unknown Uri: " + uri);
+        }
     }
 
     @Override
