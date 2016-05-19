@@ -58,9 +58,11 @@ public class CourseContract {
 
     public static final class Course implements BaseColumns{
 
+        public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_COURSE).build();
+
         public static final String CONTENT_DIR_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_COURSE;
-        public static final String CONTENT_iTEM_TYPE =
+        public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_COURSE;
 
         public static final String TABLE_NAME = "course";
@@ -89,6 +91,10 @@ public class CourseContract {
         public static final String LEVEL = "level";
         public static final String SUMMARY = "summary";
         public static final String DURATION_IN_HOURSE = "";
+
+        public static Uri buildMovieWithId(String key){
+            return CONTENT_URI.buildUpon().appendPath(key).build();
+        }
     }
 
 

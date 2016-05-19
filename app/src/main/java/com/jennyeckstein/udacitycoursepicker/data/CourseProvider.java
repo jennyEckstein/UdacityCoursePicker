@@ -50,7 +50,7 @@ public class CourseProvider extends ContentProvider {
             case COURSE:
                 return  CourseContract.Course.CONTENT_DIR_TYPE;
             case COURSE_WITH_ID:
-                return CourseContract.Course.CONTENT_iTEM_TYPE;
+                return CourseContract.Course.CONTENT_ITEM_TYPE;
 
             case INSTRUCTOR:
                 return CourseContract.Instructor.CONTENT_DIR_TYPE;
