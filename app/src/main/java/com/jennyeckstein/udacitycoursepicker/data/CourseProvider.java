@@ -58,6 +58,10 @@ public class CourseProvider extends ContentProvider {
     private static final String courseInstructorSelection =
             CourseContract.Course_Instructor.TABLE_NAME +
                     "." + CourseContract.Course_Instructor.COURSE_ID + " = ?";
+    
+    private static final String courseRelatedSelection =
+            CourseContract.Related_Courses.TABLE_NAME +
+                    "." + CourseContract.Related_Courses.COURSE_ID + " = ?";
 
     static UriMatcher buildUriMatcher(){
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
