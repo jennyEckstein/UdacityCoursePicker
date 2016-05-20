@@ -24,9 +24,9 @@ public class CourseDBHelper extends SQLiteOpenHelper{
 
         final String SQL_CREATE_RELATED_COURSES_TABLE = " CREATE TABLE " + CourseContract.Related_Courses.TABLE_NAME + " (" +
                 CourseContract.Related_Courses.COURSE_ID + " TEXT, " +
-                CourseContract.Related_Courses.RELATED_COURSE_ID + " INTEGER," +
-                " FOREIGN KEY (" + CourseContract.Related_Courses.COURSE_ID + ") REFERENCES " +
-                CourseContract.Course.TABLE_NAME + " (" + CourseContract.Course.KEY + ");" ;
+                CourseContract.Related_Courses.RELATED_COURSE_ID + " TEXT," +
+                " FOREIGN KEY (" +  CourseContract.Related_Courses.COURSE_ID + ") REFERENCES " +
+                CourseContract.Course.TABLE_NAME +  "(" + CourseContract.Course.KEY + "));" ;
 
         Log.v(LOG_TAG, SQL_CREATE_RELATED_COURSES_TABLE);
 
@@ -73,6 +73,11 @@ public class CourseDBHelper extends SQLiteOpenHelper{
                 CourseContract.Course.SUMMARY + " TEXT);";
 
         Log.v(LOG_TAG, SQL_CREATE_COURSE_TABLE);
+
+        db.execSQL(SQL_CREATE_RELATED_COURSES_TABLE);
+        db.execSQL(SQL_CREATE_INSTRUCTOR_TABLE);
+        db.execSQL(SQL_CREATE_COURSE_INSTRUCTOR_TABLE);
+        db.execSQL(SQL_CREATE_COURSE_TABLE);
 
     }
 
