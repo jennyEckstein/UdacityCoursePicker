@@ -63,6 +63,13 @@ public class CourseProvider extends ContentProvider {
             CourseContract.Related_Courses.TABLE_NAME +
                     "." + CourseContract.Related_Courses.COURSE_ID + " = ?";
 
+    private static final String courseKeyEquals =
+            CourseContract.Course.TABLE_NAME +
+                    "." + CourseContract.Course.KEY + " = ?";
+    private static final String instructorIdEquals =
+            CourseContract.Instructor.TABLE_NAME +
+                    "." + CourseContract.Instructor.ID;
+
     static UriMatcher buildUriMatcher(){
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = CourseContract.CONTENT_AUTHORITY;
@@ -121,7 +128,7 @@ public class CourseProvider extends ContentProvider {
             case COURSE:
                 cursor = courseDBHelper.getReadableDatabase().query(
                         CourseContract.Course.TABLE_NAME,
-                        null,
+                        projection,
                         selection,
                         selectionArgs,
                         null,
@@ -134,7 +141,7 @@ public class CourseProvider extends ContentProvider {
                 cursor = courseDBHelper.getReadableDatabase().query(
                         CourseContract.Course.TABLE_NAME,
                         null,
-                        selection,
+                        courseKeyEquals,
                         selectionArgs,
                         null,
                         null,
@@ -144,7 +151,7 @@ public class CourseProvider extends ContentProvider {
             case INSTRUCTOR:
                 cursor = courseDBHelper.getReadableDatabase().query(
                         CourseContract.Instructor.TABLE_NAME,
-                        null,
+                        projection,
                         selection,
                         selectionArgs,
                         null,
