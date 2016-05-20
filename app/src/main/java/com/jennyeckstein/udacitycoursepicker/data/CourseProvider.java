@@ -163,15 +163,8 @@ public class CourseProvider extends ContentProvider {
                 );
 
             case RELATED_COURSES:
-                cursor = courseDBHelper.getReadableDatabase().query(
-                        CourseContract.Related_Courses.TABLE_NAME,
-                        null,
-                        selection,
-                        selectionArgs,
-                        null,
-                        null,
-                        sortOrder
-                );
+                cursor = getRelatedCourses(uri, projection, sortOrder, selectionArgs);
+                break;
 
             case COURSE_INSTRUCTOR:
                 cursor = getInstructorsByCourse(uri, projection, sortOrder, selectionArgs);
@@ -209,6 +202,15 @@ public class CourseProvider extends ContentProvider {
 
         return courseInstructorsQueryBuilder.query(courseDBHelper.getReadableDatabase(),
                 projection, courseInstructorSelection, selectionArgs, null, null, sortOrder);
+    }
+
+    /*
+    selectionArgs here must receive Course Key in order to map the instructor
+     */
+    private Cursor getRelatedCourses(Uri uri, String [] projection, String sortOrder, String [] selectionArgs){
+
+        return courseRelatedQueryBuilder.query(courseDBHelper.getReadableDatabase(),
+                projection, courseRelatedSelection, selectionArgs, null, null, sortOrder);
     }
 
 
