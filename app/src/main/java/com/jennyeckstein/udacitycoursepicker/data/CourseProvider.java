@@ -55,6 +55,10 @@ public class CourseProvider extends ContentProvider {
         );
     };
 
+    private static final String courseInstructorSelection =
+            CourseContract.Course_Instructor.TABLE_NAME +
+                    "." + CourseContract.Course_Instructor.COURSE_ID + " = ?";
+
     static UriMatcher buildUriMatcher(){
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = CourseContract.CONTENT_AUTHORITY;
