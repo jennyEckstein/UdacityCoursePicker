@@ -4,6 +4,7 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
@@ -25,6 +26,20 @@ public class CourseProvider extends ContentProvider {
     static final int COURSE_WITH_ID = 101;
 
     static final int INSTRUCTOR_WITH_ID = 201;
+
+    private static final SQLiteQueryBuilder courseInstructorsQueryBuilder;
+
+    static {
+        courseInstructorsQueryBuilder = new SQLiteQueryBuilder();
+        courseInstructorsQueryBuilder.setTables(
+                CourseContract.Instructor.TABLE_NAME + " INNER JOIN " +
+                        CourseContract.Course_Instructor.TABLE_NAME +
+                        " ON " + CourseContract.Instructor.TABLE_NAME +
+                        "." + CourseContract.Instructor.ID +
+                        " = " + CourseContract.Course_Instructor.TABLE_NAME +
+                        "." + CourseContract.Course_Instructor.INSTRUCTOR_ID
+        );
+    }
 
     static UriMatcher buildUriMatcher(){
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
