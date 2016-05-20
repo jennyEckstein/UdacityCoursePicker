@@ -41,6 +41,20 @@ public class CourseProvider extends ContentProvider {
         );
     }
 
+    private static final SQLiteQueryBuilder courseRelatedQueryBuilder;
+
+    static {
+        courseRelatedQueryBuilder = new SQLiteQueryBuilder();
+        courseRelatedQueryBuilder.setTables(
+                CourseContract.Course.TABLE_NAME + " INNER JOIN " +
+                CourseContract.Related_Courses.TABLE_NAME +
+                " ON " + CourseContract.Course.TABLE_NAME +
+                "." + CourseContract.Course.KEY +
+                " = " + CourseContract.Related_Courses.TABLE_NAME +
+                "." + CourseContract.Related_Courses.COURSE_ID
+        );
+    };
+
     static UriMatcher buildUriMatcher(){
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = CourseContract.CONTENT_AUTHORITY;
