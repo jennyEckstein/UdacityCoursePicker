@@ -170,19 +170,13 @@ public class CourseProvider extends ContentProvider {
                 );
 
             case COURSE_INSTRUCTOR:
-                cursor = courseDBHelper.getReadableDatabase().query(
-                        CourseContract.Course_Instructor.TABLE_NAME,
-                        null,
-                        selection,
-                        selectionArgs,
-                        null,
-                        null,
-                        sortOrder
-                );
+                cursor = getInstructorsByCourse(uri, projection, sortOrder, selectionArgs);
+                break;
 
             default:
                 throw new UnsupportedOperationException("Unknown Uri: " + uri);
         }
+        return cursor;
     }
 
     @Override
@@ -200,4 +194,18 @@ public class CourseProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues values) {
         return null;
     }
+
+    /*
+    *   HELPER METHODS
+    */
+/*
+    selectionArgs here must receive Course Key in order to map the Instructor
+ */
+    private Cursor getInstructorsByCourse(Uri uri, String [] projection, String sortOrder, String [] selectionArgs){
+
+        return courseInstructorsQueryBuilder.query(courseDBHelper.getReadableDatabase(),
+                projection, courseInstructorSelection, selectionArgs, null, null, sortOrder);
+    }
+
+
 }
