@@ -98,6 +98,32 @@ public class TestDB extends AndroidTestCase{
         db.close();
     }
 
+    public void testCourseInstructorTable(){
+
+        CourseDBHelper courseDBHelper = new CourseDBHelper(mContext);
+        SQLiteDatabase db = courseDBHelper.getWritableDatabase();
+
+        ContentValues courseInstructorValues = createCourseInstructorValues();
+
+        long rowID = db.insertOrThrow(CourseContract.Course_Instructor.TABLE_NAME, null, courseInstructorValues);
+        assertTrue(rowID != -1);
+        Cursor cursor = db.query(
+                CourseContract.Course_Instructor.TABLE_NAME,
+                null, // all columns
+                null, // Columns for the "where" clause
+                null, // Values for the "where" clause
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        assertTrue(cursor.getCount() > 0);
+        assertTrue("Error: No records returned from course query", cursor.moveToFirst());
+        assertFalse("Error: More than one record returned", cursor.moveToNext());
+        cursor.close();
+        db.close();
+    }
+
     private ContentValues createCourseValues(){
         ContentValues courseValues = new ContentValues();
         courseValues.put(CourseContract.Course.SUBTITLE, "Starting Out with Web Serving Technology");
@@ -134,6 +160,14 @@ public class TestDB extends AndroidTestCase{
         instructorValues.put(CourseContract.Instructor.ID, 1001);
 
         return instructorValues;
+    }
+
+    private ContentValues createCourseInstructorValues(){
+        ContentValues courseInstructorValues = new ContentValues();
+        courseInstructorValues.put(CourseContract.Course_Instructor.COURSE_ID, "ud171");
+        courseInstructorValues.put(CourseContract.Course_Instructor.INSTRUCTOR_ID , 1001);
+
+        return courseInstructorValues;
     }
 }
 
