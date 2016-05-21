@@ -124,6 +124,30 @@ public class TestDB extends AndroidTestCase{
         db.close();
     }
 
+    public void testRelatedCourseTable(){
+        CourseDBHelper courseDBHelper = new CourseDBHelper(mContext);
+        SQLiteDatabase db = courseDBHelper.getWritableDatabase();
+
+        ContentValues relatedCourseValues = createRelatedCourseValues();
+        long rowID = db.insertOrThrow(CourseContract.Related_Courses.TABLE_NAME, null, relatedCourseValues);
+        assertTrue(rowID != -1);
+        Cursor cursor = db.query(
+                CourseContract.Related_Courses.TABLE_NAME,
+                null, // all columns
+                null, // Columns for the "where" clause
+                null, // Values for the "where" clause
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null // sort order
+        );
+
+        assertTrue(cursor.getCount() > 0);
+        assertTrue("Error: No records returned from course query", cursor.moveToFirst());
+        assertFalse("Error: More than one record returned", cursor.moveToNext());
+        cursor.close();
+        db.close();
+    }
+
     private ContentValues createCourseValues(){
         ContentValues courseValues = new ContentValues();
         courseValues.put(CourseContract.Course.SUBTITLE, "Starting Out with Web Serving Technology");
@@ -147,8 +171,6 @@ public class TestDB extends AndroidTestCase{
         courseValues.put(CourseContract.Course.LEVEL, "sdf s");
         courseValues.put(CourseContract.Course.DURATION_IN_HOURS, 504);
         courseValues.put(CourseContract.Course.SUMMARY, "This course presents an overview.");
-
-
         return courseValues;
     }
 
@@ -158,7 +180,6 @@ public class TestDB extends AndroidTestCase{
         instructorValues.put(CourseContract.Instructor.BIO, "Steve Huffman co-founded the social news site reddit.com has since grown into one of the largest communities online. In 2010, he co-founded a company to take the agony out of searching for plane and hotel tickets. Steve was named to Inc. Magazine's 30 under 30 list in 2011. He studied Computer Science at the University of Virginia.");
         instructorValues.put(CourseContract.Instructor.IMAGE, "https://lh3.ggpht.com/8U2ky8BOagj01omsrbrCcaEwruAvqMAidZQvq7IxFfall9m85tkh5VIKBhqTLoCzQLuy5YhEeOcrKIEh=s0#w=200&h=200");
         instructorValues.put(CourseContract.Instructor.ID, 1001);
-
         return instructorValues;
     }
 
@@ -166,8 +187,14 @@ public class TestDB extends AndroidTestCase{
         ContentValues courseInstructorValues = new ContentValues();
         courseInstructorValues.put(CourseContract.Course_Instructor.COURSE_ID, "ud171");
         courseInstructorValues.put(CourseContract.Course_Instructor.INSTRUCTOR_ID , 1001);
-
         return courseInstructorValues;
+    }
+
+    private ContentValues createRelatedCourseValues(){
+        ContentValues relatedCourseValues = new ContentValues();
+        relatedCourseValues.put(CourseContract.Related_Courses.COURSE_ID, "ud171");
+        relatedCourseValues.put(CourseContract.Related_Courses.RELATED_COURSE_ID, "nd004");
+        return relatedCourseValues;
     }
 }
 
