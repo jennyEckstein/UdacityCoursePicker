@@ -4,6 +4,7 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
@@ -196,7 +197,26 @@ public class CourseProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        return null;
+
+        final SQLiteDatabase db = courseDBHelper.getWritableDatabase();
+        final int match = uriMathcher.match(uri);
+
+        Uri returnUri = CourseContract.Course.CONTENT_URI;
+
+        switch (match){
+            case COURSE:
+                long id = db.insert(CourseContract.Course.TABLE_NAME, null, values);
+                if(id < 0){
+                    throw new android.database.SQLException("Failed to insert into " + uri);
+                }else{
+                    returnUri = CourseContract.Course.buildCourseWithId(values.getAsString(CourseContract.Course.KEY));
+                }
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        getContext().getContentResolver().notifyChange(returnUri, null);
+        return returnUri;
     }
 
     /*

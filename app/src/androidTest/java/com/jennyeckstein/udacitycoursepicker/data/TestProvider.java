@@ -36,7 +36,7 @@ public class TestProvider extends AndroidTestCase {
         assertEquals("Error: the Course CONTENT_URI should return Course.CONTENT_DIR_TYPE",
                 CourseContract.Course.CONTENT_DIR_TYPE, type);
 
-        type = mContext.getContentResolver().getType(CourseContract.Course.buildMovieWithId("ud171"));
+        type = mContext.getContentResolver().getType(CourseContract.Course.buildCourseWithId("ud171"));
         assertEquals("Error: the Course with ID CONTENT_URI should return Course.CONTENT_ITEM_TYPE",
                 CourseContract.Course.CONTENT_ITEM_TYPE, type);
 
