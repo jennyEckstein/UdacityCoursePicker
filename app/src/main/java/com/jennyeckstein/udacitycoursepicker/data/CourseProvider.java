@@ -219,9 +219,40 @@ public class CourseProvider extends ContentProvider {
         return returnUri;
     }
 
+    @Override
+    public int bulkInsert(Uri uri, ContentValues[] values) {
+
+        final SQLiteDatabase db = courseDBHelper.getWritableDatabase();
+        final int match = uriMathcher.match(uri);
+
+        switch (match){
+            case COURSE:
+                db.beginTransaction();
+                int courseRowsInserted = 0;
+                try{
+                    for (ContentValues value: values){
+                        long result = db.insert(CourseContract.Course.TABLE_NAME, null, value);
+                        if (result != -1){
+                            courseRowsInserted++;
+                        }
+                    }
+                    db.setTransactionSuccessful();
+                }finally {
+                    db.endTransaction();
+                }
+                getContext().getContentResolver().notifyChange(uri, null);
+                return courseRowsInserted;
+            default:{
+                //throw new UnsupportedOperationException ("Unknown uri: " + uri);
+            }
+        }
+
+        return super.bulkInsert(uri, values);
+    }
+
     /*
-    *   HELPER METHODS
-    */
+        *   HELPER METHODS
+        */
 /*
     selectionArgs here must receive Course Key in order to map the Instructor
  */
