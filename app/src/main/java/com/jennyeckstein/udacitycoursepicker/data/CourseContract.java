@@ -106,7 +106,7 @@ public class CourseContract {
         public static final String STARTER = "starter";
         public static final String LEVEL = "level";
         public static final String SUMMARY = "summary";
-        public static final String DURATION_IN_HOURS = "";
+        public static final String DURATION_IN_HOURS = "duration_in_hours";
 
         public static Uri buildCourseWithId(String key){
             return CONTENT_URI.buildUpon().appendPath(key).build();
