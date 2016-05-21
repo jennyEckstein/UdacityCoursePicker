@@ -188,7 +188,7 @@ public class UdacityContentAsyncTask extends AsyncTask {
                                     boolean full_course_available, String faq, String banner_image, String short_summary,
                                     String slug, boolean starter, String level, int expected_duration, String summary){
         ContentValues courseValues = new ContentValues();
-        courseValues.put(CourseContract.Course.SUBTITLE, subtitle);
+        //courseValues.put(CourseContract.Course.SUBTITLE, subtitle);
         courseValues.put(CourseContract.Course.KEY, key);
         courseValues.put(CourseContract.Course.IMAGE, image);
         courseValues.put(CourseContract.Course.EXPECTED_LEARNING, expected_learning);

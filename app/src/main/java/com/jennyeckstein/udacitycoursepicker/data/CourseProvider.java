@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * Created by Jenny on 5/10/2016.
@@ -127,6 +128,8 @@ public class CourseProvider extends ContentProvider {
         Cursor cursor;
         switch(uriMathcher.match(uri)){
             case COURSE:
+                Log.v(LOG_TAG, "COURSE");
+                Log.v(LOG_TAG, "COURSE");
                 cursor = courseDBHelper.getReadableDatabase().query(
                         CourseContract.Course.TABLE_NAME,
                         projection,
@@ -136,7 +139,7 @@ public class CourseProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-
+            break;
 
             case COURSE_WITH_ID:
                 cursor = courseDBHelper.getReadableDatabase().query(
@@ -148,7 +151,7 @@ public class CourseProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-
+            break;
             case INSTRUCTOR:
                 cursor = courseDBHelper.getReadableDatabase().query(
                         CourseContract.Instructor.TABLE_NAME,
@@ -159,6 +162,7 @@ public class CourseProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
+                break;
             case INSTRUCTOR_WITH_ID:
                 cursor = courseDBHelper.getReadableDatabase().query(
                         CourseContract.Instructor.TABLE_NAME,
@@ -169,7 +173,7 @@ public class CourseProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-
+                break;
             case RELATED_COURSES:
                 cursor = getRelatedCourses(uri, projection, sortOrder, selectionArgs);
                 break;
@@ -181,6 +185,7 @@ public class CourseProvider extends ContentProvider {
             default:
                 throw new UnsupportedOperationException("Unknown Uri: " + uri);
         }
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
 

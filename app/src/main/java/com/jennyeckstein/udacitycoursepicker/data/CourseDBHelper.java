@@ -11,8 +11,10 @@ import android.util.Log;
 public class CourseDBHelper extends SQLiteOpenHelper{
 
     private static final String LOG_TAG = CourseDBHelper.class.getSimpleName();
-
-    private static final int DATABASE_VERSION = 1;
+/*
+2 - added new field _id to Course table
+ */
+    private static final int DATABASE_VERSION = 2;
     static final String DATABASE_NAME = "course.db";
 
     public CourseDBHelper(Context context){
@@ -50,6 +52,7 @@ public class CourseDBHelper extends SQLiteOpenHelper{
 
 
         final String SQL_CREATE_COURSE_TABLE = "CREATE TABLE " + CourseContract.Course.TABLE_NAME + " (" +
+                CourseContract.Course._ID + " INTEGER " +
                 CourseContract.Course.SUBTITLE + " TEXT, " +
                 CourseContract.Course.KEY + " TEXT, " +
                 CourseContract.Course.IMAGE + " TEXT, " +
