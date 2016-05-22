@@ -34,6 +34,8 @@ public class CourseAdapter extends CursorAdapter {
         return 1;
     }
 
+
+
     @Override
     public int getItemViewType(int position) {
         return 1;

@@ -6,8 +6,10 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -82,8 +84,17 @@ Log.v(LOG_TAG, "onCreateView");
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle();
 
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
-                getActivity().startActivity(intent, bundle);
+                Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+                if (cursor != null) {
+                    SharedPreferences sharedPreferences =
+                            PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    int courseKeyColumn = cursor.getColumnIndex(CourseContract.Course.KEY);
+                    String courseKey = cursor.getString(courseKeyColumn);
+                    Intent intent = new Intent(getActivity(), DetailActivity.class)
+                            .setData(CourseContract.Course.buildCourseWithId(courseKey));
+                    getActivity().startActivity(intent, bundle);
+                }
+
             }
         });
         return view;
