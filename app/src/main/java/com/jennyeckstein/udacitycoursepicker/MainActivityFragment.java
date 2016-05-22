@@ -36,7 +36,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.v(LOG_TAG, "ON CREATE LOADER");
         return new CursorLoader(getActivity(), CourseContract.Course.CONTENT_URI,
-                null, null, null, null);
+                null, null, new String[]{"ud513"}, null);
     }
 
     @Override

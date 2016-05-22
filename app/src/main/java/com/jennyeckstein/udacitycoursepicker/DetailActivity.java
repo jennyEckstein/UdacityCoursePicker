@@ -2,6 +2,7 @@ package com.jennyeckstein.udacitycoursepicker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ActionProvider;
@@ -10,26 +11,43 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
 
     private ActionProvider mShareActionProvider;
+    Toolbar toolbar;
+    CollapsingToolbarLayout collapsingToolbarLayout;
+
+    public CollapsingToolbarLayout getCollapsingToolbarLayout() {
+        return collapsingToolbarLayout;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        Bundle arguments = new Bundle();
+        arguments.putParcelable(DetailActivityFragment.DETAIL_URI, getIntent().getData());
+        DetailActivityFragment fragment = new DetailActivityFragment();
+        fragment.setArguments(arguments);
+        getFragmentManager().beginTransaction().add(R.id.detail_container, fragment).commit();
 
         //setupWindowAnimations();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ImageView imageView1 = (ImageView) findViewById(R.id.detail_course_image_appBarLayout);
-        Picasso.with(this).load(R.drawable.course_test_image).into(imageView1);
+        this.toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(this.toolbar);
+
+
+
+        this.collapsingToolbarLayout =
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        //collapsingToolbarLayout.setTitle("Booo");
+
+        //getSupportActionBar().setTitle("YAY");
+
+        //ImageView imageView1 = (ImageView) findViewById(R.id.detail_course_image_appBarLayout);
+        //Picasso.with(this).load(R.drawable.course_test_image).into(imageView1);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

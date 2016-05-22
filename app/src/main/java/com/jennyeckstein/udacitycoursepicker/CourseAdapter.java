@@ -43,7 +43,7 @@ public class CourseAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        Log.v(LOG_TAG, "NEW VIEW");
+        //Log.v(LOG_TAG, "NEW VIEW");
         View view = LayoutInflater.from(context).inflate(R.layout.course_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view, 0);
         view.setTag(viewHolder);
@@ -52,7 +52,7 @@ public class CourseAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        Log.v(LOG_TAG, "BIND VIEW");
+       // Log.v(LOG_TAG, "BIND VIEW");
         ViewHolder viewHolder = (ViewHolder) view.getTag();
 
         String imageLink = cursor.getString(cursor.getColumnIndex(CourseContract.Course.IMAGE));

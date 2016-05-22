@@ -124,24 +124,24 @@ public class CourseProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-
+        Log.v(LOG_TAG, "QUERY");
         Cursor cursor;
         switch(uriMathcher.match(uri)){
             case COURSE:
                 Log.v(LOG_TAG, "COURSE");
-                Log.v(LOG_TAG, "COURSE");
                 cursor = courseDBHelper.getReadableDatabase().query(
                         CourseContract.Course.TABLE_NAME,
-                        projection,
-                        selection,
-                        selectionArgs,
                         null,
                         null,
-                        sortOrder
+                        null,
+                        null,
+                        null,
+                        null
                 );
             break;
 
             case COURSE_WITH_ID:
+                Log.v(LOG_TAG, "COURSE WITH ID");
                 cursor = courseDBHelper.getReadableDatabase().query(
                         CourseContract.Course.TABLE_NAME,
                         null,

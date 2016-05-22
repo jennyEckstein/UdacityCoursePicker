@@ -123,7 +123,7 @@ public class UdacityContentAsyncTask extends AsyncTask {
         try{
             JSONObject courseObject  = new JSONObject(jsonString);
             JSONArray jsonArray = courseObject.getJSONArray(COURSES);
-
+Log.v(LOG_TAG, "json object");
             Vector<ContentValues> courseVector = new Vector<>(jsonArray.length());
 
             for(int i = 0; i < jsonArray.length(); i++){
