@@ -2,7 +2,6 @@ package com.jennyeckstein.udacitycoursepicker;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +60,7 @@ public class CourseAdapter extends CursorAdapter {
         String level = cursor.getString(cursor.getColumnIndex(CourseContract.Course.LEVEL));
         String new_release = cursor.getString(cursor.getColumnIndex(CourseContract.Course.NEW_RELEASE));
 
-        Log.v(LOG_TAG, "Binding View: " + title);
+       // Log.v(LOG_TAG, "Binding View: " + title);
         if (imageLink != null) {
             Picasso.with(context).load(imageLink).into(viewHolder.course_image_view);
         }

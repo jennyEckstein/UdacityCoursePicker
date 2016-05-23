@@ -105,7 +105,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             Log.v(LOG_TAG, "Setting passed URI");
             this.passedUri = arguments.getParcelable(DetailActivityFragment.DETAIL_URI);
             Log.v(LOG_TAG, "PASSES URI: " + this.passedUri);
-            getLoaderManager().initLoader(DETAIL_LOADER, null, this);
+
+            //TODO: fix init loader
+            //getLoaderManager().initLoader(DETAIL_LOADER, null, this);
         }else{
             //TODO: take care of else case
             Log.v(LOG_TAG, "NO ARGUMENTS - NO LOADER");
