@@ -10,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -65,10 +63,9 @@ public class CourseAdapter extends CursorAdapter {
         //Log.v(LOG_TAG, "IMAGE LINK: "+ title + " |" + imageLink + "|");
         if (!("".equals(imageLink)) && imageLink != null) {
 
-
+//TODO: resized images for picasso, to stop java from crashing, still they must be proportional
             Picasso.with(context).load(imageLink).error(R.drawable.course_test_image)
-                    .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                    .resize(200,150)
                     .into(viewHolder.course_image_view);
         }else{
             //TODO: Account for no image link case. Make sure missing image course does not pick up image from course before.
