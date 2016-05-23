@@ -1,7 +1,9 @@
 package com.jennyeckstein.udacitycoursepicker.service;
 
 import android.app.IntentService;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -36,6 +38,7 @@ public class CourseService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.v(LOG_TAG, "BEGIN JSON DOWNLOAD");
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
@@ -226,5 +229,14 @@ public class CourseService extends IntentService {
         map.put("months", 5208); //24 * 7 * 31
 
         return numberUnit * map.get(duration_unit).intValue();
+    }
+
+    public static class AlarmReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.v(LOG_TAG, "RECEIVED ALARM");
+            Intent sendIntent = new Intent(context, CourseService.class);
+            context.startService(sendIntent);
+        }
     }
 }
