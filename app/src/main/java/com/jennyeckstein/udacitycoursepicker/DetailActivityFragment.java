@@ -1,5 +1,6 @@
 package com.jennyeckstein.udacitycoursepicker;
 
+
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Context;

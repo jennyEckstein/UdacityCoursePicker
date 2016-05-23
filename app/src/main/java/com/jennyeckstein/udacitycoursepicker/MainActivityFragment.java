@@ -1,16 +1,14 @@
 package com.jennyeckstein.udacitycoursepicker;
 
 import android.app.ActivityOptions;
-import android.app.Fragment;
-import android.app.LoaderManager;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,22 +28,22 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     private View view;
     private CourseAdapter mCourseAdapter;
 
-    private android.app.LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
+    private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
 
     @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.v(LOG_TAG, "ON CREATE LOADER");
-        return new CursorLoader(getActivity(), CourseContract.Course.CONTENT_URI,
+        return new android.support.v4.content.CursorLoader(getActivity(), CourseContract.Course.CONTENT_URI,
                 null, null, new String[]{"ud513"}, null);
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
         mCourseAdapter.swapCursor(null);
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
         Log.v(LOG_TAG, "ON LOAD FINISHED");
         Log.v(LOG_TAG, "Size: " + String.valueOf(data.getCount()));
 

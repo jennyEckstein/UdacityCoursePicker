@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity{
         viewPager = (ViewPager)findViewById(R.id.viewPager);
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-       // viewPagerAdapter.addFragments(new DetailActivityFragment(), "All");
+        viewPagerAdapter.addFragments(new MainActivityFragment(), "All");
         viewPagerAdapter.addFragments(new NewCourseFragment(), "New");
         viewPagerAdapter.addFragments(new ShortCourseFragment(), "Short");
 
