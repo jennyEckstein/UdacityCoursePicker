@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -31,6 +32,12 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private Uri passedUri;
     Context context;
     String title, image, summary;
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         if (this.passedUri != null) {
@@ -84,7 +91,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         //((DetailActivity)getActivity()).getActionBar().setTitle(title);
 
          ImageView imageView = (ImageView) getActivity().findViewById(R.id.detail_course_image_appBarLayout);
-         Picasso.with(context).load(image).into(imageView);
+         Picasso.with(context).load(image).networkPolicy(NetworkPolicy.OFFLINE).into(imageView);
 
         TextView summaryView = (TextView) getView().findViewById(R.id.course_description);
         summaryView.setText(summary);

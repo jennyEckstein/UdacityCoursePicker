@@ -33,6 +33,11 @@ public class ShortCourseFragment extends Fragment
     private android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.v(LOG_TAG, "ON CREATE LOADER");
         String selection = CourseContract.Course.TABLE_NAME +

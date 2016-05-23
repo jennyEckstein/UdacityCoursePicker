@@ -32,6 +32,11 @@ public class NewCourseFragment extends Fragment implements LoaderManager.LoaderC
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.v(LOG_TAG, "ON CREATE LOADER");
         String selection = CourseContract.Course.TABLE_NAME +

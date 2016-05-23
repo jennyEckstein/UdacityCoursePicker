@@ -23,6 +23,12 @@ public class MainActivity extends AppCompatActivity{
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -54,7 +54,7 @@ public class CourseDBHelper extends SQLiteOpenHelper{
         final String SQL_CREATE_COURSE_TABLE = "CREATE TABLE " + CourseContract.Course.TABLE_NAME + " (" +
                 CourseContract.Course._ID + " INTEGER " +
                 CourseContract.Course.SUBTITLE + " TEXT, " +
-                CourseContract.Course.KEY + " TEXT, " +
+                CourseContract.Course.KEY + " TEXT PRIMARY KEY, " +
                 CourseContract.Course.IMAGE + " TEXT, " +
                 CourseContract.Course.EXPECTED_LEARNING + " TEXT, " +
                 CourseContract.Course.FEATURED + " BOOLEAN, " +
