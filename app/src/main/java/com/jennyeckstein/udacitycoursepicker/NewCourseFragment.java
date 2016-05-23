@@ -56,6 +56,8 @@ public class NewCourseFragment extends Fragment implements LoaderManager.LoaderC
         mCourseAdapter.swapCursor(null);
     }
 
+
+
     public NewCourseFragment() {
         // Required empty public constructor
     }
@@ -70,6 +72,7 @@ public class NewCourseFragment extends Fragment implements LoaderManager.LoaderC
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
     }
 
     @Override
