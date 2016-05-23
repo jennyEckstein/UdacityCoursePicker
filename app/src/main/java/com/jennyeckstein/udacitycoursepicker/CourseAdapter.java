@@ -65,7 +65,7 @@ public class CourseAdapter extends CursorAdapter {
 
 //TODO: resized images for picasso, to stop java from crashing, still they must be proportional
             Picasso.with(context).load(imageLink).error(R.drawable.course_test_image)
-                    .resize(200,150)
+                    .resize(300, 200)
                     .into(viewHolder.course_image_view);
         }else{
             //TODO: Account for no image link case. Make sure missing image course does not pick up image from course before.
