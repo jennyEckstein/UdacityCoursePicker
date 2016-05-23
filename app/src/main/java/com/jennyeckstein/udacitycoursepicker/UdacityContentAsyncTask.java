@@ -128,6 +128,7 @@ Log.v(LOG_TAG, "json object");
             Vector<ContentValues> courseVector = new Vector<>(jsonArray.length());
 
             for(int i = 0; i < jsonArray.length(); i++){
+                //TODO: Check for duplicates, and data changes in the database
                 JSONObject object = jsonArray.getJSONObject(i);
                 String subtitle = object.getString(SUBTITLE);
                 String key = object.getString(KEY);
