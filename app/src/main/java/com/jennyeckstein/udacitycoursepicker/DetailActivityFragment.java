@@ -108,7 +108,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             Log.v(LOG_TAG, "PASSES URI: " + this.passedUri);
 
             //TODO: fix init loader
-            //getLoaderManager().initLoader(DETAIL_LOADER, null, this);
+            getLoaderManager().initLoader(DETAIL_LOADER, null, this);
         }else{
             //TODO: take care of else case
             Log.v(LOG_TAG, "NO ARGUMENTS - NO LOADER");
