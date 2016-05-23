@@ -138,7 +138,7 @@ Log.v(LOG_TAG, "json object");
                 String title = object.getString(TITLE);
                 String required_knowledge = object.getString(REQUIRED_KNOWLEDGE);
                 String syllabus = object.getString(SYLLABUS);
-                boolean new_release = object.getBoolean(NEW_RELEASE);
+                String new_release = object.getString(NEW_RELEASE);
                 String homepage = object.getString(HOMEPAGE);
                 String project_description = object.getString(PROJECT_DESCRIPTION);
                 boolean full_course_available = object.getBoolean(FULL_COURSE_AVAILABLE);
@@ -184,7 +184,7 @@ Log.v(LOG_TAG, "json object");
 
     private ContentValues createCourseValues(String subtitle, String key, String image, String expected_learning,
                                     boolean featured, String project_name, String title, String required_knowledge,
-                                    String syllabus, boolean new_release, String homepage, String project_description,
+                                    String syllabus, String new_release, String homepage, String project_description,
                                     boolean full_course_available, String faq, String banner_image, String short_summary,
                                     String slug, boolean starter, String level, int expected_duration, String summary){
         ContentValues courseValues = new ContentValues();

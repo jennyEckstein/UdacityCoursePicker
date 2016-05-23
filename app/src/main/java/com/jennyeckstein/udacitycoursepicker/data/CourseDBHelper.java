@@ -62,7 +62,7 @@ public class CourseDBHelper extends SQLiteOpenHelper{
                 CourseContract.Course.TITLE + " TEXT, " +
                 CourseContract.Course.REQUIRED_KNOWLEDGE + " TEXT, " +
                 CourseContract.Course.SYLLABUS + " TEXT, " +
-                CourseContract.Course.NEW_RELEASE + " BOOLEAN, " +
+                CourseContract.Course.NEW_RELEASE + " TEXT, " +
                 CourseContract.Course.HOMEPAGE + " TEXT, " +
                 CourseContract.Course.PROJECT_DESCRIPTION + " TEXT, " +
                 CourseContract.Course.FULL_COURSE_AVAILABLE + " BOOLEAN, " +

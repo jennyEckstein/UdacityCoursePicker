@@ -33,8 +33,16 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.v(LOG_TAG, "ON CREATE LOADER");
-        return new android.support.v4.content.CursorLoader(getActivity(), CourseContract.Course.CONTENT_URI,
-                null, null, new String[]{"ud513"}, null);
+        String selection = CourseContract.Course.TABLE_NAME +
+                "." + CourseContract.Course.LEVEL + " = ?";
+        String [] selectionArgs = {"beginner"};
+        return new android.support.v4.content.CursorLoader(
+                getActivity(),
+                CourseContract.Course.CONTENT_URI,
+                null,
+                selection,
+                selectionArgs,
+                null);
     }
 
     @Override
@@ -64,8 +72,6 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
     }
 
     @Override

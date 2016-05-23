@@ -68,6 +68,7 @@ public class CourseProvider extends ContentProvider {
     private static final String courseKeyEquals =
             CourseContract.Course.TABLE_NAME +
                     "." + CourseContract.Course.KEY + " = ?";
+
     private static final String instructorIdEquals =
             CourseContract.Instructor.TABLE_NAME +
                     "." + CourseContract.Instructor.ID;
@@ -132,8 +133,8 @@ public class CourseProvider extends ContentProvider {
                 cursor = courseDBHelper.getReadableDatabase().query(
                         CourseContract.Course.TABLE_NAME,
                         null,
-                        null,
-                        null,
+                        selection,
+                        selectionArgs,
                         null,
                         null,
                         null
