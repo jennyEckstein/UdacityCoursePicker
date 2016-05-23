@@ -41,6 +41,9 @@
         <provider
             android:authorities="com.jennyeckstein.udacitycoursepicker"
             android:name="com.jennyeckstein.udacitycoursepicker.data.CourseProvider" />
+        <service
+            android:name=".service.CourseService"
+            />
     </application>
 
 </manifest>
