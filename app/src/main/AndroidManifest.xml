@@ -50,9 +50,6 @@
             android:exported="false"
             android:syncable="true"/>
 
-        <service android:name=".service.CourseService"/>
-        <receiver android:name=".service.CourseService$AlarmReceiver"/>
-
         <service
             android:name=".sync.CourseAuthenticatorService"
             >
