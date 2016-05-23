@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Vector;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -148,7 +149,7 @@ Log.v(LOG_TAG, "json object");
                 String slug = object.getString(SLUG);
                 boolean starter = object.getBoolean(STARTER);
                 String level = object.getString(LEVEL);
-               // String expected_duration_unit = object.getString(EXPECTED_DURATION_UNIT);
+                String expected_duration_unit = object.getString(EXPECTED_DURATION_UNIT);
                 int expected_duration = object.getInt(EXPECTED_DURATION);
                 String summary = object.getString(SUMMARY);
 
@@ -158,7 +159,7 @@ Log.v(LOG_TAG, "json object");
                 ContentValues courseValues = createCourseValues(subtitle,key,image, expected_learning,
                         featured,project_name, title,required_knowledge, syllabus, new_release,
                         homepage, project_description, full_course_available, faq, banner_image,
-                        short_summary, slug, starter, level, expected_duration, summary);
+                        short_summary, slug, starter, level, expected_duration,expected_duration_unit, summary);
 
                 courseVector.add(courseValues);
 
@@ -186,7 +187,8 @@ Log.v(LOG_TAG, "json object");
                                     boolean featured, String project_name, String title, String required_knowledge,
                                     String syllabus, String new_release, String homepage, String project_description,
                                     boolean full_course_available, String faq, String banner_image, String short_summary,
-                                    String slug, boolean starter, String level, int expected_duration, String summary){
+                                    String slug, boolean starter, String level, int expected_duration,
+                                    String expected_duration_unit, String summary){
         ContentValues courseValues = new ContentValues();
         //courseValues.put(CourseContract.Course.SUBTITLE, subtitle);
         courseValues.put(CourseContract.Course.KEY, key);
@@ -207,9 +209,29 @@ Log.v(LOG_TAG, "json object");
         courseValues.put(CourseContract.Course.SLUG, slug);
         courseValues.put(CourseContract.Course.STARTER, starter);
         courseValues.put(CourseContract.Course.LEVEL, level);
-        courseValues.put(CourseContract.Course.DURATION_IN_HOURS, expected_duration); //TODO: must accept calculated amount of hr
+        courseValues.put(CourseContract.Course.EXPECTED_DURATION, expected_duration);
+        courseValues.put(CourseContract.Course.EXPECTED_DURATION_UNIT, expected_duration_unit);
+        //This field is only used for sorting purposes
+        courseValues.put(CourseContract.Course.DURATION_IN_HOURS,
+                convertToHours(expected_duration, expected_duration_unit));
         courseValues.put(CourseContract.Course.SUMMARY, summary);
 
         return courseValues;
     }
+
+    private int convertToHours(int numberUnit, String duration_unit){
+        if (numberUnit <= 0){
+            return 0;
+        }
+        if(duration_unit == null){
+            return 0;
+        }
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("days", 24);
+        map.put("weeks", 168); //24 * 7
+        map.put("months", 5208); //24 * 7 * 31
+
+        return numberUnit * map.get(duration_unit).intValue();
+    }
+
 }
