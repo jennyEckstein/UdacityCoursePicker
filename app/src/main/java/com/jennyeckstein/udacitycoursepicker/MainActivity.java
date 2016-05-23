@@ -1,9 +1,5 @@
 package com.jennyeckstein.udacitycoursepicker;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -15,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jennyeckstein.udacitycoursepicker.service.CourseService;
+import com.jennyeckstein.udacitycoursepicker.sync.CourseSyncAdapter;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -50,11 +46,14 @@ public class MainActivity extends AppCompatActivity{
 
         getWindow().setExitTransition(new Explode());
 
-        Intent alarmIntent = new Intent(this, CourseService.AlarmReceiver.class);
+        CourseSyncAdapter.syncImmediately(this);
+
+   /*     Intent alarmIntent = new Intent(this, CourseService.AlarmReceiver.class);
         PendingIntent pendingIntent =
                 PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+5000, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+5000, pendingIntent);*/
+
 
         //Now we call it from AlarmReceiver
        // Intent intent = new Intent(this, CourseService.class);
