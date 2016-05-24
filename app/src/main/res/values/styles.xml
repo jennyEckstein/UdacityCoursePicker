@@ -37,13 +37,19 @@
 
     <style name="Udacity_List">
         <item name="android:background">@color/white</item>
-        <item name="android:layout_margin">0dp</item>
+        <item name="android:padding">16dp</item>
     </style>
     <style name="Udacity_TabBar">
-        <item name="android:elevation">4dp</item>
+        <item name="android:elevation">12dp</item>
     </style>
     <style name="Udacity_AppBar">
-        <item name="android:elevation">6dp</item>
+        <item name="android:elevation">12dp</item>
     </style>
+
+    <style name="Udacity_List_Item_Image">
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:elevation">2dp</item>
+    </style>
+
 
 </resources>
