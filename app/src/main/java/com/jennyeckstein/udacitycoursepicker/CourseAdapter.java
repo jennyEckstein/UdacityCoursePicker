@@ -76,7 +76,10 @@ public class CourseAdapter extends CursorAdapter {
             viewHolder.course_duration_view.setText(expected_duration + " " + duration_unit);
         }
         viewHolder.course_level_view.setText(level);
-        viewHolder.course_new_release_view.setText(new_release);
+        if("true".equals(new_release)) {
+            viewHolder.course_new_release_view.setText("new");
+            viewHolder.course_new_release_view.setBackgroundColor(context.getResources().getColor(R.color.soft_yellow));
+        }
     }
 
     public static class ViewHolder{
