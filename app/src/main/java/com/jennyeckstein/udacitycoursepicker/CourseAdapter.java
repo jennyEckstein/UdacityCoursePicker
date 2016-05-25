@@ -56,7 +56,8 @@ public class CourseAdapter extends CursorAdapter {
 
         String imageLink = cursor.getString(cursor.getColumnIndex(CourseContract.Course.IMAGE));
         String title = cursor.getString(cursor.getColumnIndex(CourseContract.Course.TITLE));
-        String duration = cursor.getString(cursor.getColumnIndex(CourseContract.Course.DURATION_IN_HOURS));
+        String duration_unit = cursor.getString(cursor.getColumnIndex(CourseContract.Course.EXPECTED_DURATION_UNIT));
+        String expected_duration = cursor.getString(cursor.getColumnIndex(CourseContract.Course.EXPECTED_DURATION));
         String level = cursor.getString(cursor.getColumnIndex(CourseContract.Course.LEVEL));
         String new_release = cursor.getString(cursor.getColumnIndex(CourseContract.Course.NEW_RELEASE));
 
@@ -71,7 +72,9 @@ public class CourseAdapter extends CursorAdapter {
             //TODO: Account for no image link case. Make sure missing image course does not pick up image from course before.
         }
         viewHolder.course_title_view.setText(title);
-        viewHolder.course_duration_view.setText(duration);
+        if (!"0".equals(expected_duration)) {
+            viewHolder.course_duration_view.setText(expected_duration + " " + duration_unit);
+        }
         viewHolder.course_level_view.setText(level);
         viewHolder.course_new_release_view.setText(new_release);
     }
