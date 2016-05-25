@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity{
         viewPagerAdapter.addFragments(new MainActivityFragment(), "Begginer");
         viewPagerAdapter.addFragments(new NewCourseFragment(), "New");
         viewPagerAdapter.addFragments(new ShortCourseFragment(), "Short");
+        viewPagerAdapter.addFragments(new LikedCourseFragment(), "Liked");
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);

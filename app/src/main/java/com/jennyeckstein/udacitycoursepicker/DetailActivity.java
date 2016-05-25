@@ -66,7 +66,7 @@ public class DetailActivity extends AppCompatActivity {
                 String[] selectionArgs = {}; //TODO: add course key here
 
                 getContentResolver().update(
-                        CourseContract.Course.buildCourseWithId(""),
+                        CourseContract.Course.buildCourseWithId("[COURSE_KEY]"),
                         courseUpdateValues,
                         selection,
                         selectionArgs);
