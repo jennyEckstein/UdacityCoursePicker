@@ -1,5 +1,7 @@
 package com.jennyeckstein.udacitycoursepicker;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -74,6 +76,24 @@ public class MainActivity extends AppCompatActivity{
        // this.startService(intent);
 
     }
+
+    private boolean isNetworkAvailable(){
+        try{
+            ConnectivityManager connectivityManager =
+                    (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+            //TODO check other valid connections
+            NetworkInfo netInfo =
+                    connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            if(netInfo != null && netInfo.getState() == NetworkInfo.State.CONNECTED){
+                return true;
+            }
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
