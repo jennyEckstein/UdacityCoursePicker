@@ -6,7 +6,6 @@
     android:id="@+id/detail_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
     tools:context="com.jennyeckstein.udacitycoursepicker.DetailActivity"
     android:background="#d82a2a">
 
@@ -20,31 +19,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            android:fitsSystemWindows="true"
+            app:expandedTitleMarginStart="50dp"
             android:background="#78df49">
 
 
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:contentInsetStart="0dp"
-                app:layout_collapseMode="pin"
-                android:elevation="4dp"
-                android:background="#601d5a">
 
-
-
-            </android.support.v7.widget.Toolbar>
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_collapseMode="parallax"
+                app:contentInsetStart="50dp"
                 android:background="#2cb27c">
 
 
-                    <ImageView
+                <ImageView
                     android:id="@+id/detail_course_image_appBarLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -54,24 +43,42 @@
                     app:layout_scrollFlags="scroll|enterAlways"
                     />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/scrim"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/scrim"/>
 
-                </FrameLayout>
+            </FrameLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                android:background="@color/colorAccent"
+                >
 
 
-</android.support.design.widget.CollapsingToolbarLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:layout_below="@+id/toolbar"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello, I am a working text"/>-->
 
         <include layout="@layout/content_detail"
             />
