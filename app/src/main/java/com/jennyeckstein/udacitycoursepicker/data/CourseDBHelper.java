@@ -75,7 +75,9 @@ public class CourseDBHelper extends SQLiteOpenHelper{
                 CourseContract.Course.DURATION_IN_HOURS + " INTEGER, " +
                 CourseContract.Course.EXPECTED_DURATION + " TEXT, " +
                 CourseContract.Course.EXPECTED_DURATION_UNIT + " TEXT, " +
-                CourseContract.Course.SUMMARY + " TEXT);";
+                CourseContract.Course.SUMMARY + " TEXT, " +
+                CourseContract.Course.LIKED_VIDEO + "TEXT 0" +
+                ");";
 
         Log.v(LOG_TAG, SQL_CREATE_COURSE_TABLE);
 
