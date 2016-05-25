@@ -192,6 +192,14 @@ public class CourseProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        final SQLiteDatabase db = courseDBHelper.getWritableDatabase();
+        final int match = uriMathcher.match(uri);
+        switch (match){
+            case COURSE_WITH_ID:
+                   db.update(CourseContract.Course.TABLE_NAME, values, selection, selectionArgs);
+                break;
+
+        }
         return 0;
     }
 
