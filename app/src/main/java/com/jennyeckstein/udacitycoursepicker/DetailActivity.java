@@ -1,16 +1,18 @@
 package com.jennyeckstein.udacitycoursepicker;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.ActionProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -53,8 +55,21 @@ public class DetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+               /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+                ContentValues courseUpdateValues = new ContentValues();
+                //TODO: add alt for if course was already liked, get info from fragment
+                courseUpdateValues.put(CourseContract.Course.LIKED_VIDEO, "1");
+                String selection =
+                        CourseContract.Course.TABLE_NAME +
+                                "." + CourseContract.Course.KEY + " = ?";
+                String[] selectionArgs = {}; //TODO: add course key here
+
+                getContentResolver().update(
+                        CourseContract.Course.buildCourseWithId(""),
+                        courseUpdateValues,
+                        selection,
+                        selectionArgs);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
