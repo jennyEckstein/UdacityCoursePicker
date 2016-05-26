@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,7 +112,14 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         TextView summaryView = (TextView) getView().findViewById(R.id.course_description);
         summaryView.setText(summary);
 
-        passData(data.getString(data.getColumnIndex(CourseContract.Course.LIKED_COURSE)));
+        String like = data.getString(data.getColumnIndex(CourseContract.Course.LIKED_COURSE));
+        passData(like);
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        if ("1".equals(like)){
+            fab.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.fab_on));
+        }else{
+            fab.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.fab_off));
+        }
     }
 
     @Override

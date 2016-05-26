@@ -62,7 +62,7 @@ public class DetailActivity extends AppCompatActivity implements DetailActivityF
         //ImageView imageView1 = (ImageView) findViewById(R.id.detail_course_image_appBarLayout);
         //Picasso.with(this).load(R.drawable.course_test_image).into(imageView1);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,8 +73,10 @@ public class DetailActivity extends AppCompatActivity implements DetailActivityF
 
                     if("0".equals(currentVideoLike)) {
                         currentVideoLike = "1";
+                        fab.setImageDrawable(getResources().getDrawable(R.mipmap.fab_on));
                     }else{
                         currentVideoLike = "0";
+                        fab.setImageDrawable(getResources().getDrawable(R.mipmap.fab_off));
                     }
                     courseUpdateValues.put(CourseContract.Course.LIKED_COURSE, currentVideoLike);
                     Log.v(LOG_TAG, "LIKED: " + currentVideoLike);
