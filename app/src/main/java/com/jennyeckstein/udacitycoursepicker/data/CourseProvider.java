@@ -194,13 +194,15 @@ public class CourseProvider extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         final SQLiteDatabase db = courseDBHelper.getWritableDatabase();
         final int match = uriMathcher.match(uri);
+        int rowID = -1;
         switch (match){
             case COURSE_WITH_ID:
-                   db.update(CourseContract.Course.TABLE_NAME, values, selection, selectionArgs);
+                  rowID = db.update(CourseContract.Course.TABLE_NAME, values, selection, selectionArgs);
                 break;
 
         }
-        return 0;
+        getContext().getContentResolver().notifyChange(uri, null);
+        return rowID;
     }
 
     @Override
