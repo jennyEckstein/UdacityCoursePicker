@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -111,6 +112,9 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         TextView summaryView = (TextView) getView().findViewById(R.id.course_description);
         summaryView.setText(summary);
+
+        Button start_course_button = (Button) getView().findViewById(R.id.begin_course_button);
+        //todo add on click listener for the button
 
         String like = data.getString(data.getColumnIndex(CourseContract.Course.LIKED_COURSE));
         passData(like);
