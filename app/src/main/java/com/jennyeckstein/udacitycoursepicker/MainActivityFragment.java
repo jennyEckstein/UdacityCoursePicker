@@ -2,10 +2,8 @@ package com.jennyeckstein.udacitycoursepicker;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -95,8 +93,6 @@ Log.v(LOG_TAG, "onCreateView");
 
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 if (cursor != null) {
-                    SharedPreferences sharedPreferences =
-                            PreferenceManager.getDefaultSharedPreferences(getActivity());
                     int courseKeyColumn = cursor.getColumnIndex(CourseContract.Course.KEY);
                     String courseKey = cursor.getString(courseKeyColumn);
                     Intent intent = new Intent(getActivity(), DetailActivity.class)

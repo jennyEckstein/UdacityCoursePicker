@@ -13,8 +13,10 @@ public class CourseDBHelper extends SQLiteOpenHelper{
     private static final String LOG_TAG = CourseDBHelper.class.getSimpleName();
 /*
 2 - added new field _id to Course table
+3 - added new filed liked
+4 - fixed table name
  */
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
     static final String DATABASE_NAME = "course.db";
 
     public CourseDBHelper(Context context){
@@ -76,7 +78,7 @@ public class CourseDBHelper extends SQLiteOpenHelper{
                 CourseContract.Course.EXPECTED_DURATION + " TEXT, " +
                 CourseContract.Course.EXPECTED_DURATION_UNIT + " TEXT, " +
                 CourseContract.Course.SUMMARY + " TEXT, " +
-                CourseContract.Course.LIKED_VIDEO + "TEXT 0" +
+                CourseContract.Course.LIKED_COURSE + " TEXT default '0'" +
                 ");";
 
         Log.v(LOG_TAG, SQL_CREATE_COURSE_TABLE);

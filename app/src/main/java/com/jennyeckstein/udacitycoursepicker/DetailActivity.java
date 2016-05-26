@@ -8,17 +8,27 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ActionProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements DetailActivityFragment.OnDataPass {
 
+    private static final String LOG_TAG = DetailActivity.class.getSimpleName();
     private ActionProvider mShareActionProvider;
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
+    String currentKey;
+    String currentVideoLike;
+
+    @Override
+    public void onDataPass(String data) {
+        this.currentVideoLike = data;
+        Log.v(LOG_TAG, "LIKE PASSED: " + this.currentVideoLike);
+    }
 
     public CollapsingToolbarLayout getCollapsingToolbarLayout() {
         return collapsingToolbarLayout;
@@ -31,6 +41,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Bundle arguments = new Bundle();
         arguments.putParcelable(DetailActivityFragment.DETAIL_URI, getIntent().getData());
+        this.currentKey = getIntent().getData().getPathSegments().get(1);
         DetailActivityFragment fragment = new DetailActivityFragment();
         fragment.setArguments(arguments);
         getFragmentManager().beginTransaction().add(R.id.detail_container, fragment).commit();
@@ -52,26 +63,34 @@ public class DetailActivity extends AppCompatActivity {
         //Picasso.with(this).load(R.drawable.course_test_image).into(imageView1);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-                ContentValues courseUpdateValues = new ContentValues();
-                //TODO: add alt for if course was already liked, get info from fragment
-                courseUpdateValues.put(CourseContract.Course.LIKED_VIDEO, "1");
-                String selection =
-                        CourseContract.Course.TABLE_NAME +
-                                "." + CourseContract.Course.KEY + " = ?";
-                String[] selectionArgs = {}; //TODO: add course key here
+        if (fab != null) {
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();*/
+                    ContentValues courseUpdateValues = new ContentValues();
 
-                getContentResolver().update(
-                        CourseContract.Course.buildCourseWithId("[COURSE_KEY]"),
-                        courseUpdateValues,
-                        selection,
-                        selectionArgs);
-            }
-        });
+                    if("0".equals(currentVideoLike)) {
+                        currentVideoLike = "1";
+                    }else{
+                        currentVideoLike = "0";
+                    }
+                    courseUpdateValues.put(CourseContract.Course.LIKED_COURSE, currentVideoLike);
+                    Log.v(LOG_TAG, "LIKED: " + currentVideoLike);
+                    String selection =
+                            CourseContract.Course.TABLE_NAME +
+                                    "." + CourseContract.Course.KEY + " = ?";
+                    String[] selectionArgs = {currentKey};
+
+                    getContentResolver().update(
+                            CourseContract.Course.buildCourseWithId(currentKey),
+                            courseUpdateValues,
+                            selection,
+                            selectionArgs);
+                }
+            });
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }

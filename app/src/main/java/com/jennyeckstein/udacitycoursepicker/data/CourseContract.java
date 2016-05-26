@@ -109,7 +109,7 @@ public class CourseContract {
         public static final String DURATION_IN_HOURS = "duration_in_hours";
         public static final String EXPECTED_DURATION_UNIT = "expected_duration_unit";
         public static final String EXPECTED_DURATION = "expected_duration";
-        public static final String LIKED_VIDEO = "liked";
+        public static final String LIKED_COURSE = "liked_course";
 
         public static Uri buildCourseWithId(String key){
             return CONTENT_URI.buildUpon().appendPath(key).build();

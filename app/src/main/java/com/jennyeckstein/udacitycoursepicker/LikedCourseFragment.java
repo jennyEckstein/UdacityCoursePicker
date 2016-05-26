@@ -33,10 +33,11 @@ public class LikedCourseFragment extends Fragment
     private CourseAdapter mCourseAdapter;
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
 
+
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String selection = CourseContract.Course.TABLE_NAME +
-                "." + CourseContract.Course.LIKED_VIDEO + " = ?";
+                "." + CourseContract.Course.LIKED_COURSE + " = ?";
         String [] selectionArgs = {"1"};
 
         return new CursorLoader(getActivity(),

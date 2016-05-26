@@ -16,6 +16,13 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />-->
 
+    <TextView
+        android:id="@+id/no_internet"
+        android:background="@color/orange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
         <include
             android:layout_height="wrap_content"
             android:layout_width="match_parent"

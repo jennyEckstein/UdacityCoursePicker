@@ -32,6 +32,21 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     private Uri passedUri;
     Context context;
     String title, image, summary;
+    OnDataPass dataPass;
+
+    public interface OnDataPass{
+        public void onDataPass(String data);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        dataPass = (OnDataPass) context;
+    }
+
+    public void passData(String data){
+        dataPass.onDataPass(data);
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -95,6 +110,8 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         TextView summaryView = (TextView) getView().findViewById(R.id.course_description);
         summaryView.setText(summary);
+
+        passData(data.getString(data.getColumnIndex(CourseContract.Course.LIKED_COURSE)));
     }
 
     @Override
