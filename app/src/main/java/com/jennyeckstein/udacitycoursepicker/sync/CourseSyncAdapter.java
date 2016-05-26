@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SyncRequest;
 import android.content.SyncResult;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,14 +38,16 @@ import javax.net.ssl.HttpsURLConnection;
 public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
     public final String LOG_TAG = CourseSyncAdapter.class.getSimpleName();
     String parseJsonString;
+    HashMap<String, Integer> coursesMap;
 
     // Interval at which to sync with the weather, in milliseconds.
 // 60 seconds (1 minute)  180 = 3 hours
-    public static final int SYNC_INTERVAL = 3000; //60 * 180;
+    public static final int SYNC_INTERVAL = 60 * 180;
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL/3;
 
     public CourseSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
+        this.coursesMap = new HashMap<>();
     }
 
     /**
@@ -92,6 +95,19 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
 
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
+        // 1. Load all the keys in a map
+
+        Cursor cursor = getContext().getContentResolver().query(CourseContract.Course.CONTENT_URI,
+                new String[]{CourseContract.Course.KEY},
+                null,
+                null,
+                null);
+
+        do{
+            //TODO check if HashMap allows duplicates
+            coursesMap.put(cursor.getString(cursor.getColumnIndex(CourseContract.Course.KEY)), 0);
+        }while(cursor.moveToNext());
+
         Log.d(LOG_TAG, "onPerformSync Called.");
         Log.v(LOG_TAG, "BEGIN JSON DOWNLOAD");
         HttpURLConnection urlConnection = null;
@@ -225,7 +241,6 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
         final String SUMMARY = "summary";
         final String EXPECTED_DURATION = "expected_duration";
 
-
         try {
             JSONObject courseObject = new JSONObject(jsonString);
             JSONArray jsonArray = courseObject.getJSONArray(COURSES);
@@ -233,10 +248,12 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
             Vector<ContentValues> courseVector = new Vector<>(jsonArray.length());
 
             for (int i = 0; i < jsonArray.length(); i++) {
-                //TODO: Check for duplicates, and data changes in the database
                 JSONObject object = jsonArray.getJSONObject(i);
                 String subtitle = object.getString(SUBTITLE);
                 String key = object.getString(KEY);
+                //checks for duplicate courses before inserting
+                if(!coursesMap.containsKey(key)) {
+
                 String image = object.getString(IMAGE);
                 String expected_learning = object.getString(EXPECTED_LEARNING);
                 boolean featured = object.getBoolean(FEATURED);
@@ -258,17 +275,14 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
                 String expected_duration_unit = object.getString(EXPECTED_DURATION_UNIT);
                 int expected_duration = object.getInt(EXPECTED_DURATION);
                 String summary = object.getString(SUMMARY);
-
-
                 ContentValues courseValues = createCourseValues(subtitle, key, image, expected_learning,
                         featured, project_name, title, required_knowledge, syllabus, new_release,
                         homepage, project_description, full_course_available, faq, banner_image,
                         short_summary, slug, starter, level, expected_duration, expected_duration_unit, summary);
 
                 courseVector.add(courseValues);
-
                 //Log.v(LOG_TAG, key + " - " + title);
-            }
+            }}
             Log.v(LOG_TAG, "BEFORE INSERT");
             Log.v(LOG_TAG, "VECTOR SIZE " + String.valueOf(courseVector.size()));
 

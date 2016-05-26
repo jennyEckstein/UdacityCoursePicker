@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,12 +8,22 @@
     tools:showIn="@layout/activity_main">
 
 
+    <TextView
+        android:id="@+id/no_internet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:textColor="@color/colorPrimaryDark"
+        android:gravity="center"/>
+
     <ListView
         android:id="@+id/courseView"
         android:theme="@style/Udacity_List"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_below="@+id/no_internet"
         tools:content="@layout/course_item"/>
 
-</FrameLayout>
+</RelativeLayout>

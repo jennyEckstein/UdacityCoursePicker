@@ -63,10 +63,14 @@ public class MainActivity extends AppCompatActivity{
 
         getWindow().setExitTransition(new Explode());
 
+        TextView no_internet_view = (TextView) findViewById(R.id.no_internet);
+        no_internet_view.setVisibility(View.GONE);
+
         if(isNetworkAvailable()) {
             CourseSyncAdapter.syncImmediately(this);
+
         }else{
-            TextView no_internet_view = (TextView) findViewById(R.id.no_internet);
+
             no_internet_view.setText("No Internet Connection");
         }
 
