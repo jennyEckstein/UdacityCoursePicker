@@ -103,10 +103,10 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
                 null,
                 null);
 
-        do{
+        while(cursor.moveToNext()){
             //TODO check if HashMap allows duplicates
             coursesMap.put(cursor.getString(cursor.getColumnIndex(CourseContract.Course.KEY)), 0);
-        }while(cursor.moveToNext());
+        }
 
         Log.d(LOG_TAG, "onPerformSync Called.");
         Log.v(LOG_TAG, "BEGIN JSON DOWNLOAD");

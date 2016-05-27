@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -35,6 +36,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     Context context;
     String title, image, summary;
     OnDataPass dataPass;
+    String url;
 
     public interface OnDataPass{
         public void onDataPass(String data);
@@ -115,6 +117,16 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         Button start_course_button = (Button) getView().findViewById(R.id.begin_course_button);
         //todo add on click listener for the button
+
+        url = data.getString(data.getColumnIndex(CourseContract.Course.HOMEPAGE));
+        start_course_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
 
         String like = data.getString(data.getColumnIndex(CourseContract.Course.LIKED_COURSE));
         passData(like);

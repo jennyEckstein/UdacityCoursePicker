@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.jennyeckstein.udacitycoursepicker.sync.CourseSyncAdapter;
 
@@ -63,16 +62,16 @@ public class MainActivity extends AppCompatActivity{
 
         getWindow().setExitTransition(new Explode());
 
-        TextView no_internet_view = (TextView) findViewById(R.id.no_internet);
-        no_internet_view.setVisibility(View.GONE);
+       // TextView no_internet_view = (TextView) findViewById(R.id.no_internet);
+       // no_internet_view.setVisibility(View.GONE);
 
         if(isNetworkAvailable()) {
             CourseSyncAdapter.syncImmediately(this);
 
-        }else{
+        }/*else{
 
             no_internet_view.setText("No Internet Connection");
-        }
+        }*/
 
    /*     Intent alarmIntent = new Intent(this, CourseService.AlarmReceiver.class);
         PendingIntent pendingIntent =
