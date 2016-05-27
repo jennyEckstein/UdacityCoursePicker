@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 
@@ -47,7 +48,13 @@ public class LikedCourseFragment extends Fragment
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if (!data.moveToFirst()){
+            TextView textView = (TextView) getView().findViewById(R.id.no_data);
+            textView.setText("No Liked Videos");
+            Log.v(LOG_TAG, "SETTING LIKED NONE");
+        }
         mCourseAdapter.swapCursor(data);
+        Log.v(LOG_TAG, "SETTING LIKED");
     }
 
     @Override
