@@ -7,12 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.jennyeckstein.udacitycoursepicker.DetailActivity"
-    android:background="#d82a2a">
+    >
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#292c65">
+        >
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:expandedTitleMarginStart="50dp"
-            android:background="#78df49">
+           >
 
 
 
@@ -30,7 +30,7 @@
                 android:layout_height="match_parent"
                 app:layout_collapseMode="parallax"
                 app:contentInsetStart="50dp"
-                android:background="#2cb27c">
+                >
 
 
                 <ImageView
@@ -65,30 +65,16 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scroll"
+    <fragment
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_detail_container"
+        android:name="com.jennyeckstein.udacitycoursepicker.DetailActivityFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content"
+        />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <include layout="@layout/content_detail"/>
-
-        </LinearLayout>
-
-
-    </android.support.v4.widget.NestedScrollView>
-
-    <!--    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello, I am a working text"/>-->
-
+           <!--  <include layout="@layout/content_detail"/>
+-->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

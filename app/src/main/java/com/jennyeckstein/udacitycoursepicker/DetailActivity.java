@@ -37,6 +37,7 @@ public class DetailActivity extends AppCompatActivity implements DetailActivityF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_detail);
 
         Bundle arguments = new Bundle();
@@ -44,7 +45,7 @@ public class DetailActivity extends AppCompatActivity implements DetailActivityF
         this.currentKey = getIntent().getData().getPathSegments().get(1);
         DetailActivityFragment fragment = new DetailActivityFragment();
         fragment.setArguments(arguments);
-        getFragmentManager().beginTransaction().add(R.id.detail_container, fragment).commit();
+        getFragmentManager().beginTransaction().add(R.id.fragment_detail_container, fragment).commit();
 
         //setupWindowAnimations();
 

@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity{
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
+    boolean mTwoPane;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -43,6 +44,20 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(findViewById(R.id.fragment_detail_container) != null){
+            mTwoPane = true;
+Log.v(LOG_TAG, "TWO PANE");
+            if(savedInstanceState == null){
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_detail_container, new MainActivityFragment())
+                        .commit();
+            }
+
+        }else{
+            Log.v(LOG_TAG, "ONE PANE");
+            mTwoPane = false;
+        }
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);

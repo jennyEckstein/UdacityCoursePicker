@@ -112,8 +112,13 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
          ImageView imageView = (ImageView) getActivity().findViewById(R.id.detail_course_image_appBarLayout);
          Picasso.with(context).load(image).networkPolicy(NetworkPolicy.OFFLINE).into(imageView);
 
-        TextView summaryView = (TextView) getView().findViewById(R.id.course_description);
-        summaryView.setText(summary);
+/*        TextView summaryView = (TextView) getView().findViewById(R.id.course_description);
+        summaryView.setText(summary);*/
+
+   /*     TextView subtitleView = (TextView) getView().findViewById(R.id.course_subtitle);
+        int subtitleColumn = data.getColumnIndex(CourseContract.Course.SYLLABUS);
+        String subtitle = data.getString(subtitleColumn);
+        subtitleView.setText(subtitle);*/
 
         Button start_course_button = (Button) getView().findViewById(R.id.begin_course_button);
         //todo add on click listener for the button
