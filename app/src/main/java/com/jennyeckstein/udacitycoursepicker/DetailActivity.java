@@ -15,7 +15,8 @@ import android.view.View;
 
 import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 
-public class DetailActivity extends AppCompatActivity implements DetailActivityFragment.OnDataPass {
+public class DetailActivity extends AppCompatActivity
+        implements DetailActivityFragment.OnDataPass {
 
     private static final String LOG_TAG = DetailActivity.class.getSimpleName();
     private ActionProvider mShareActionProvider;

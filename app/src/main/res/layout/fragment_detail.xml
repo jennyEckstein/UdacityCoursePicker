@@ -19,6 +19,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/course_subtitle"
                 tools:text="Hello I am subtitle"/>
             <Button
                 android:layout_width="match_parent"

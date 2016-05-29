@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 import com.squareup.picasso.NetworkPolicy;
@@ -25,7 +26,8 @@ import com.squareup.picasso.Picasso;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class DetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class DetailActivityFragment extends Fragment
+        implements LoaderManager.LoaderCallbacks<Cursor>{
 
     private static final String LOG_TAG = DetailActivityFragment.class.getSimpleName();
     static final String DETAIL_URI = "URI";
@@ -40,12 +42,20 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         public void onDataPass(String data);
     }
 
- /*   @Override
+/*
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.dataPass = (OnDataPass) getActivity();
+    }
+*/
+
+/*    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         dataPass = (OnDataPass) context;
-    }
-*/
+    }*/
+
     public void passData(String data){
         dataPass.onDataPass(data);
     }
@@ -89,7 +99,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
        // getActivity().setTitle(title);
 
-      /*  CollapsingToolbarLayout collapsingToolbarLayout = ((DetailActivity) getActivity()).getCollapsingToolbarLayout();
+/*        CollapsingToolbarLayout collapsingToolbarLayout = ((DetailActivity) getActivity()).getCollapsingToolbarLayout();
                if(collapsingToolbarLayout != null){
                    Log.v(LOG_TAG, "SUCCESS");
                    collapsingToolbarLayout.setTitle(title);
@@ -116,13 +126,13 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         if(imageView != null) {
             Picasso.with(context).load(image).networkPolicy(NetworkPolicy.OFFLINE).into(imageView);
         }
-/*        TextView summaryView = (TextView) getView().findViewById(R.id.course_description);
+   /*     TextView summaryView = (TextView) getView().findViewById(R.id.course_description);
         summaryView.setText(summary);*/
 
-   /*     TextView subtitleView = (TextView) getView().findViewById(R.id.course_subtitle);
+        TextView subtitleView = (TextView) getView().findViewById(R.id.course_subtitle);
         int subtitleColumn = data.getColumnIndex(CourseContract.Course.SYLLABUS);
         String subtitle = data.getString(subtitleColumn);
-        subtitleView.setText(subtitle);*/
+        subtitleView.setText(subtitle);
 
         Button start_course_button = (Button) getView().findViewById(R.id.begin_course_button);
         //todo add on click listener for the button
@@ -139,7 +149,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         });
 
         String like = data.getString(data.getColumnIndex(CourseContract.Course.LIKED_COURSE));
-       // passData(like);
+        ((OnDataPass) getActivity()).onDataPass(like);
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         if (fab != null) {
             if ("1".equals(like)) {

@@ -1,8 +1,10 @@
 package com.jennyeckstein.udacitycoursepicker;
 
+import android.content.ContentValues;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +19,9 @@ import android.view.ViewGroup;
 import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 import com.jennyeckstein.udacitycoursepicker.sync.CourseSyncAdapter;
 
-public class MainActivity extends AppCompatActivity implements MainActivityFragment.SendBackToMainActivity{
+public class MainActivity extends AppCompatActivity
+        implements MainActivityFragment.SendBackToMainActivity,
+                    DetailActivityFragment.OnDataPass{
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -29,6 +33,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
     ViewPagerAdapter viewPagerAdapter;
     boolean mTwoPane;
     String currentKey;
+    String currentVideoLike;
+
+    @Override
+    public void onDataPass(String data) {
+        this.currentVideoLike = data;
+        Log.v(LOG_TAG, "LIKE PASSED: " + this.currentVideoLike);
+    }
 
     @Override
     public void sendCourseKeyToMainActivity(String courseKey) {
@@ -42,15 +53,48 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
             Bundle args = new Bundle();
             if(currentKey == null || "".equals(currentKey)){
                 Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
-            }
-            args.putParcelable(DetailActivityFragment.DETAIL_URI,
-                    CourseContract.Course.buildCourseWithId(currentKey));
-            detailActivityFragment.setArguments(args);
+            }else {
+                final FloatingActionButton fab =
+                        (FloatingActionButton) findViewById(R.id.fab);
+                if (fab != null) {
+                    fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                   /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();*/
+                            ContentValues courseUpdateValues = new ContentValues();
 
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_detail_container,
-                            detailActivityFragment)
-                    .commit();
+                            if("0".equals(currentVideoLike)) {
+                                currentVideoLike = "1";
+                                fab.setImageDrawable(getResources().getDrawable(R.mipmap.fab_on));
+                            }else{
+                                currentVideoLike = "0";
+                                fab.setImageDrawable(getResources().getDrawable(R.mipmap.fab_off));
+                            }
+                            courseUpdateValues.put(CourseContract.Course.LIKED_COURSE, currentVideoLike);
+                            Log.v(LOG_TAG, "LIKED: " + currentVideoLike);
+                            String selection =
+                                    CourseContract.Course.TABLE_NAME +
+                                            "." + CourseContract.Course.KEY + " = ?";
+                            String[] selectionArgs = {currentKey};
+
+                            getContentResolver().update(
+                                    CourseContract.Course.buildCourseWithId(currentKey),
+                                    courseUpdateValues,
+                                    selection,
+                                    selectionArgs);
+                        }
+                    });
+                }
+                args.putParcelable(DetailActivityFragment.DETAIL_URI,
+                        CourseContract.Course.buildCourseWithId(currentKey));
+                detailActivityFragment.setArguments(args);
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_detail_container,
+                                detailActivityFragment)
+                        .commit();
+            }
         }
         Log.v(LOG_TAG, "WE SHOULD HAVE OUR FRAGMENT ");
     }
