@@ -38,6 +38,7 @@ public class DetailActivityFragment extends Fragment
     OnDataPass dataPass;
     String url;
     String subtitle,durationUnit, expected_duration,level,required_knowledge,syllabus, faq;
+    private TextView durationTextView;
 
     public interface OnDataPass{
         public void onDataPass(String data);
@@ -82,6 +83,7 @@ public class DetailActivityFragment extends Fragment
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
         if(!data.moveToFirst()){
             Log.v(LOG_TAG, "NO DATA RETURNED");
             return;
@@ -115,10 +117,16 @@ public class DetailActivityFragment extends Fragment
 
         Log.v(LOG_TAG, title + " | " + image + " | " + summary);
 
-        TextView durationTextView = (TextView) getView().findViewById(R.id.duration);
-        String dur = expected_duration + " " + durationUnit;
+        String dur = this.expected_duration + " " + this.durationUnit;
         Log.v(LOG_TAG, "SETTING DURATION " + dur);
-        durationTextView.setText(dur);
+        if(dur != null || !"".equals(dur)) {
+            if(durationTextView != null) {
+                Log.v(LOG_TAG, "SETTING TEXT VIEW " + dur);
+                durationTextView.setText(dur);
+            }
+        }else{
+            Log.v(LOG_TAG, "FAIL SETTING TEXT VIEW " + dur);
+        }
 
        /* TextView levelTextView = (TextView) getView().findViewById(R.id.course_level);
         levelTextView.setText(level);
@@ -201,6 +209,8 @@ public class DetailActivityFragment extends Fragment
                 fab.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.fab_off));
             }
         }
+
+        Log.v(LOG_TAG, "ON LOAD FINISHED");
     }
 
     @Override
@@ -239,9 +249,11 @@ public class DetailActivityFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+Log.v(LOG_TAG, "ON CREATE VIEW");
         //View activityView = inflater.inflate(R.layout.activity_detail, container, false);
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
+        this.durationTextView = (TextView) view.findViewById(R.id.duration);
+
        // ImageView imageView = (ImageView) view.findViewById(R.id.detail_course_image);
        // Picasso.with(getContext()).load(R.drawable.course_test_image).into(imageView);
 

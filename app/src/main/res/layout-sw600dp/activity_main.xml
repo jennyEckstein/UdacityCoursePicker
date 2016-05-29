@@ -20,6 +20,7 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:theme="@style/Udacity_AppBar"
+            android:background="@color/white"
             >
 
             <!--        <android.support.v7.widget.Toolbar
@@ -44,12 +45,25 @@
 
             </android.support.design.widget.TabLayout>
 
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/progressBar1"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center" />
+
+
+
             <android.support.v4.view.ViewPager
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
                 android:id="@+id/viewPager"
                 >
+
+
                 <fragment
                     android:id="@+id/main_activity_fragment"
                     android:name="com.jennyeckstein.udacitycoursepicker.MainActivityFragment"

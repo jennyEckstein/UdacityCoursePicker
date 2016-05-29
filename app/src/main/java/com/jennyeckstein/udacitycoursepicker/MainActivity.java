@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 import com.jennyeckstein.udacitycoursepicker.sync.CourseSyncAdapter;
@@ -35,15 +36,22 @@ public class MainActivity extends AppCompatActivity
     boolean mTwoPane;
     String currentKey;
     String currentVideoLike;
+    private ProgressBar spinner;
+
+    private static final String DETAIL_FRAGMENT_TAG = "DFTAG";
 
     @Override
     public void onDataPass(String data) {
         this.currentVideoLike = data;
         Log.v(LOG_TAG, "LIKE PASSED: " + this.currentVideoLike);
+        Log.v(LOG_TAG, "STOP SPINNER - data passed");
+        spinner.setVisibility(View.GONE);
     }
 
     @Override
     public void onFirstLoad(final String currentKey) {
+        Log.v(LOG_TAG, "STOP SPINNER - first load");
+        spinner.setVisibility(View.GONE);
         this.currentKey = currentKey;
         Log.v(LOG_TAG, "Key Received by activity " + currentKey);
 
@@ -93,7 +101,8 @@ public class MainActivity extends AppCompatActivity
 
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragment_detail_container,
-                                detailActivityFragment)
+                                detailActivityFragment,
+                                DETAIL_FRAGMENT_TAG)
                         .commit();
             }
         }
@@ -150,7 +159,8 @@ public class MainActivity extends AppCompatActivity
 
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragment_detail_container,
-                                detailActivityFragment)
+                                detailActivityFragment,
+                                DETAIL_FRAGMENT_TAG)
                         .commit();
             }
         }else{
@@ -179,12 +189,15 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.spinner = (ProgressBar) findViewById(R.id.progressBar1);
+
         if(findViewById(R.id.fragment_detail_container) != null){
             mTwoPane = true;
 Log.v(LOG_TAG, "TWO PANE");
             if(savedInstanceState == null){
                 DetailActivityFragment detailActivityFragment =
                         new DetailActivityFragment();
+
                 Bundle args = new Bundle();
                 if(currentKey == null || "".equals(currentKey)){
                     Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
@@ -195,8 +208,9 @@ Log.v(LOG_TAG, "TWO PANE");
 
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragment_detail_container,
-                                 detailActivityFragment)
-                .commit();
+                                detailActivityFragment,
+                                DETAIL_FRAGMENT_TAG)
+                        .commit();
             }else{
                 mTwoPane = false;
             }
@@ -228,7 +242,9 @@ Log.v(LOG_TAG, "TWO PANE");
        // no_internet_view.setVisibility(View.GONE);
 
         if(isNetworkAvailable()) {
+            Log.v(LOG_TAG, "SYNC IMMEDIATELY = SHOW SPINNER");
             CourseSyncAdapter.syncImmediately(this);
+            spinner.setVisibility(View.VISIBLE);
 
         }/*else{
 
