@@ -14,9 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 import com.jennyeckstein.udacitycoursepicker.sync.CourseSyncAdapter;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements MainActivityFragment.SendBackToMainActivity{
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -27,6 +28,32 @@ public class MainActivity extends AppCompatActivity{
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
     boolean mTwoPane;
+    String currentKey;
+
+    @Override
+    public void sendCourseKeyToMainActivity(String courseKey) {
+        this.currentKey = courseKey;
+        Log.v(LOG_TAG, "Key Received by activity " + courseKey);
+
+        if(mTwoPane){
+            Log.v(LOG_TAG, "CREATING DETAIL FRAGMENT ");
+            DetailActivityFragment detailActivityFragment =
+                    new DetailActivityFragment();
+            Bundle args = new Bundle();
+            if(currentKey == null || "".equals(currentKey)){
+                Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
+            }
+            args.putParcelable(DetailActivityFragment.DETAIL_URI,
+                    CourseContract.Course.buildCourseWithId(currentKey));
+            detailActivityFragment.setArguments(args);
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_detail_container,
+                            detailActivityFragment)
+                    .commit();
+        }
+        Log.v(LOG_TAG, "WE SHOULD HAVE OUR FRAGMENT ");
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -49,9 +76,20 @@ public class MainActivity extends AppCompatActivity{
             mTwoPane = true;
 Log.v(LOG_TAG, "TWO PANE");
             if(savedInstanceState == null){
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_detail_container, new MainActivityFragment())
-                        .commit();
+                DetailActivityFragment detailActivityFragment =
+                        new DetailActivityFragment();
+                Bundle args = new Bundle();
+                if(currentKey == null || "".equals(currentKey)){
+                    Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
+                }
+                args.putParcelable(DetailActivityFragment.DETAIL_URI,
+                        CourseContract.Course.buildCourseWithId(currentKey));
+                detailActivityFragment.setArguments(args);
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_detail_container,
+                                 detailActivityFragment)
+                .commit();
             }
 
         }else{

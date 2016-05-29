@@ -10,7 +10,6 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 import com.squareup.picasso.NetworkPolicy;
@@ -42,12 +40,12 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         public void onDataPass(String data);
     }
 
-    @Override
+ /*   @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         dataPass = (OnDataPass) context;
     }
-
+*/
     public void passData(String data){
         dataPass.onDataPass(data);
     }
@@ -77,10 +75,12 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             Log.v(LOG_TAG, "NO DATA RETURNED");
             return;
         }
+        int keyColumn = data.getColumnIndex(CourseContract.Course.KEY);
         int titleColumn = data.getColumnIndex(CourseContract.Course.TITLE);
         int imageColumn = data.getColumnIndex(CourseContract.Course.IMAGE);
         int summaryColumn = data.getColumnIndex(CourseContract.Course.SUMMARY);
 
+        String key = data.getString(keyColumn);
         this.title = data.getString(titleColumn);
         this.image = data.getString(imageColumn);
         this.summary = data.getString(summaryColumn);
@@ -89,13 +89,15 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
        // getActivity().setTitle(title);
 
-        CollapsingToolbarLayout collapsingToolbarLayout = ((DetailActivity) getActivity()).getCollapsingToolbarLayout();
+      /*  CollapsingToolbarLayout collapsingToolbarLayout = ((DetailActivity) getActivity()).getCollapsingToolbarLayout();
                if(collapsingToolbarLayout != null){
                    Log.v(LOG_TAG, "SUCCESS");
                    collapsingToolbarLayout.setTitle(title);
                }else{
                    Log.v(LOG_TAG, "ITS NULLLLLLLLLL");
-               }
+               }*/
+
+
        // ((DetailActivity)context).getSupportActionBar().setTitle(title);
 
         /*CollapsingToolbarLayout collapsingToolbarLayout =
@@ -110,8 +112,10 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         //((DetailActivity)getActivity()).getActionBar().setTitle(title);
 
          ImageView imageView = (ImageView) getActivity().findViewById(R.id.detail_course_image_appBarLayout);
-         Picasso.with(context).load(image).networkPolicy(NetworkPolicy.OFFLINE).into(imageView);
 
+        if(imageView != null) {
+            Picasso.with(context).load(image).networkPolicy(NetworkPolicy.OFFLINE).into(imageView);
+        }
 /*        TextView summaryView = (TextView) getView().findViewById(R.id.course_description);
         summaryView.setText(summary);*/
 
@@ -122,6 +126,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
         Button start_course_button = (Button) getView().findViewById(R.id.begin_course_button);
         //todo add on click listener for the button
+        start_course_button.setText(key);
 
         url = data.getString(data.getColumnIndex(CourseContract.Course.HOMEPAGE));
         start_course_button.setOnClickListener(new View.OnClickListener(){
@@ -134,12 +139,14 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         });
 
         String like = data.getString(data.getColumnIndex(CourseContract.Course.LIKED_COURSE));
-        passData(like);
+       // passData(like);
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        if ("1".equals(like)){
-            fab.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.fab_on));
-        }else{
-            fab.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.fab_off));
+        if (fab != null) {
+            if ("1".equals(like)) {
+                fab.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.fab_on));
+            } else {
+                fab.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.fab_off));
+            }
         }
     }
 
