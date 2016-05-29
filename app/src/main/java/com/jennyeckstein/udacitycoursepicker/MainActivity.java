@@ -1,6 +1,7 @@
 package com.jennyeckstein.udacitycoursepicker;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -95,6 +96,11 @@ public class MainActivity extends AppCompatActivity
                                 detailActivityFragment)
                         .commit();
             }
+        }else{
+            Log.v(LOG_TAG, "ONE PANE sending intent");
+            Intent intent = new Intent(this, DetailActivity.class).setData(
+                    CourseContract.Course.buildCourseWithId(currentKey));
+            startActivity(intent);
         }
         Log.v(LOG_TAG, "WE SHOULD HAVE OUR FRAGMENT ");
     }
@@ -134,6 +140,8 @@ Log.v(LOG_TAG, "TWO PANE");
                         .replace(R.id.fragment_detail_container,
                                  detailActivityFragment)
                 .commit();
+            }else{
+                mTwoPane = false;
             }
 
         }else{
@@ -182,6 +190,8 @@ Log.v(LOG_TAG, "TWO PANE");
        // this.startService(intent);
 
     }
+
+
 
     private boolean isNetworkAvailable(){
         try{

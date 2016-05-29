@@ -99,13 +99,15 @@ public class DetailActivityFragment extends Fragment
 
        // getActivity().setTitle(title);
 
-/*        CollapsingToolbarLayout collapsingToolbarLayout = ((DetailActivity) getActivity()).getCollapsingToolbarLayout();
+/*
+        CollapsingToolbarLayout collapsingToolbarLayout = ((DetailActivity) getActivity()).getCollapsingToolbarLayout();
                if(collapsingToolbarLayout != null){
                    Log.v(LOG_TAG, "SUCCESS");
                    collapsingToolbarLayout.setTitle(title);
                }else{
                    Log.v(LOG_TAG, "ITS NULLLLLLLLLL");
-               }*/
+               }
+*/
 
 
        // ((DetailActivity)context).getSupportActionBar().setTitle(title);

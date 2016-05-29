@@ -32,6 +32,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
     public interface SendBackToMainActivity{
         public void sendCourseKeyToMainActivity(String courseKey);
+       // public void onItemSelected(Uri uri);
     }
 
     @Override
