@@ -43,6 +43,63 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onFirstLoad(final String currentKey) {
+        this.currentKey = currentKey;
+        Log.v(LOG_TAG, "Key Received by activity " + currentKey);
+
+        if(mTwoPane){
+            Log.v(LOG_TAG, "CREATING DETAIL FRAGMENT ");
+            DetailActivityFragment detailActivityFragment =
+                    new DetailActivityFragment();
+            Bundle args = new Bundle();
+            if(currentKey == null || "".equals(currentKey)){
+                Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
+            }else {
+                final FloatingActionButton fab =
+                        (FloatingActionButton) findViewById(R.id.fab);
+                if (fab != null) {
+                    fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                   /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();*/
+                            ContentValues courseUpdateValues = new ContentValues();
+
+                            if("0".equals(currentVideoLike)) {
+                                currentVideoLike = "1";
+                                fab.setImageDrawable(getResources().getDrawable(R.mipmap.fab_on));
+                            }else{
+                                currentVideoLike = "0";
+                                fab.setImageDrawable(getResources().getDrawable(R.mipmap.fab_off));
+                            }
+                            courseUpdateValues.put(CourseContract.Course.LIKED_COURSE, currentVideoLike);
+                            Log.v(LOG_TAG, "LIKED: " + currentVideoLike);
+                            String selection =
+                                    CourseContract.Course.TABLE_NAME +
+                                            "." + CourseContract.Course.KEY + " = ?";
+                            String[] selectionArgs = {currentKey};
+
+                            getContentResolver().update(
+                                    CourseContract.Course.buildCourseWithId(currentKey),
+                                    courseUpdateValues,
+                                    selection,
+                                    selectionArgs);
+                        }
+                    });
+                }
+                args.putParcelable(DetailActivityFragment.DETAIL_URI,
+                        CourseContract.Course.buildCourseWithId(currentKey));
+                detailActivityFragment.setArguments(args);
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_detail_container,
+                                detailActivityFragment)
+                        .commit();
+            }
+        }
+    }
+
+    @Override
     public void sendCourseKeyToMainActivity(String courseKey) {
         this.currentKey = courseKey;
         Log.v(LOG_TAG, "Key Received by activity " + courseKey);

@@ -37,6 +37,7 @@ public class DetailActivityFragment extends Fragment
     String title, image, summary;
     OnDataPass dataPass;
     String url;
+    String subtitle,durationUnit, expected_duration,level,required_knowledge,syllabus, faq;
 
     public interface OnDataPass{
         public void onDataPass(String data);
@@ -89,13 +90,55 @@ public class DetailActivityFragment extends Fragment
         int titleColumn = data.getColumnIndex(CourseContract.Course.TITLE);
         int imageColumn = data.getColumnIndex(CourseContract.Course.IMAGE);
         int summaryColumn = data.getColumnIndex(CourseContract.Course.SUMMARY);
+       // int subtitleColumn = data.getColumnIndex(CourseContract.Course.SUBTITLE);
+        int durationUnitColumn = data.getColumnIndex(CourseContract.Course.EXPECTED_DURATION_UNIT);
+        int expected_duration = data.getColumnIndex(CourseContract.Course.EXPECTED_DURATION);
+        int level = data.getColumnIndex(CourseContract.Course.LEVEL);
+        int required_knowledge = data.getColumnIndex(CourseContract.Course.REQUIRED_KNOWLEDGE);
+        int syllabus = data.getColumnIndex(CourseContract.Course.SYLLABUS);
+        int faq = data.getColumnIndex(CourseContract.Course.FAQ);
+
+
 
         String key = data.getString(keyColumn);
         this.title = data.getString(titleColumn);
         this.image = data.getString(imageColumn);
         this.summary = data.getString(summaryColumn);
+       // this.subtitle = data.getString(subtitleColumn);
+        this.durationUnit = data.getString(durationUnitColumn);
+        this.expected_duration = data.getString(expected_duration);
+        this.level = data.getString(level);
+        this.required_knowledge = data.getString(required_knowledge);
+        this.syllabus = data.getString(syllabus);
+        this.faq = data.getString(faq);
+
 
         Log.v(LOG_TAG, title + " | " + image + " | " + summary);
+
+        TextView durationTextView = (TextView) getView().findViewById(R.id.duration);
+        String dur = expected_duration + " " + durationUnit;
+        Log.v(LOG_TAG, "SETTING DURATION " + dur);
+        durationTextView.setText(dur);
+
+       /* TextView levelTextView = (TextView) getView().findViewById(R.id.course_level);
+        levelTextView.setText(level);
+
+        TextView requiredKnowledgeTextView = (TextView) getView().findViewById(R.id.required_knowledge);
+        requiredKnowledgeTextView.setText(required_knowledge);
+*/
+
+        TextView summaryTextView = (TextView) getView().findViewById(R.id.summary);
+
+        if(summaryTextView != null) {
+            Log.v(LOG_TAG, "SUMMARY IS NOT NULL!!!!!!!!!!!");
+            Log.v(LOG_TAG, "SUMMARY: " + summary);
+            summaryTextView.setText(summary);
+        }else{
+            Log.v(LOG_TAG, "SUMMARY IS NULL!!!!!!!!!!!");
+        }
+/*
+        TextView syllabusTextView = (TextView) getView().findViewById(R.id.syllabus);
+        syllabusTextView.setText(faq);*/
 
        // getActivity().setTitle(title);
 
@@ -132,8 +175,6 @@ public class DetailActivityFragment extends Fragment
         summaryView.setText(summary);*/
 
         TextView subtitleView = (TextView) getView().findViewById(R.id.course_subtitle);
-        int subtitleColumn = data.getColumnIndex(CourseContract.Course.SYLLABUS);
-        String subtitle = data.getString(subtitleColumn);
         subtitleView.setText(subtitle);
 
         Button start_course_button = (Button) getView().findViewById(R.id.begin_course_button);
@@ -205,13 +246,6 @@ public class DetailActivityFragment extends Fragment
        // Picasso.with(getContext()).load(R.drawable.course_test_image).into(imageView);
 
         //((DetailActivity)getActivity()).getActionBar().setTitle(title);
-
-
-
-
-
-
-
         return view;
     }
 }

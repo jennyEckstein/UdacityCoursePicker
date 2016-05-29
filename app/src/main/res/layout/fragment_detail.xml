@@ -13,19 +13,80 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView" >
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/course_subtitle"
-                tools:text="Hello I am subtitle"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/course_subtitle"
+                    tools:text="How to Make an Android App"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/course_layout_detail"
+                    android:layout_below="@id/course_subtitle"
+                   >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/duration"
+                    android:background="@color/pink"
+                    android:textSize="16sp"
+                    tools:text="3 weeks"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/course_level"
+                    tools:text="ADVANCED"/>
+            </LinearLayout>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/begin_course_button"/>
-        </RelativeLayout>
+                android:id="@+id/begin_course_button"
+                android:text="Go to Udacity"
+                android:layout_below="@+id/course_layout_detail"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/required_knowledge"
+                android:layout_below="@id/begin_course_button"
+                tools:text="If you are new to programming and don’t know where to start"
+                />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/required_knowledge"
+                android:id="@+id/summary"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/summary"
+                android:background="@color/green"
+                android:id="@+id/syllabus"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/syllabus"
+                android:id="@+id/faq"/>
+
+
+
+    </RelativeLayout>
     </ScrollView>
 </FrameLayout>

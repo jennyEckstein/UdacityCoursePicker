@@ -20,7 +20,8 @@ import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class MainActivityFragment extends Fragment
+        implements LoaderManager.LoaderCallbacks<Cursor>{
 
     private static final String LOG_TAG = MainActivityFragment.class.getSimpleName();
     private static final int COURSE_LOADER = 0;
@@ -32,7 +33,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
     public interface SendBackToMainActivity{
         public void sendCourseKeyToMainActivity(String courseKey);
-       // public void onItemSelected(Uri uri);
+        public void onFirstLoad(String currentKey);
     }
 
     @Override
@@ -43,6 +44,9 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
     public void sendToMain(String courseKey){
         sendBackToMainActivity.sendCourseKeyToMainActivity(courseKey);
+    }
+    public void firstLoad(String courseKey){
+        sendBackToMainActivity.onFirstLoad(courseKey);
     }
 
     @Override
@@ -76,7 +80,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
         Log.v(LOG_TAG, "Size: " + String.valueOf(data.getCount()));
 
         if(data.moveToFirst() == true){
-            sendToMain(data.getString(data.getColumnIndex(CourseContract.Course.KEY)));
+            firstLoad(data.getString(data.getColumnIndex(CourseContract.Course.KEY)));
         }else{
             Log.v(LOG_TAG, "FIRST LOAD - THERE IS NO KEY TO PASS");
         }
