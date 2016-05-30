@@ -40,7 +40,7 @@
                     android:id="@+id/duration"
                     android:background="@color/pink"
                     android:textSize="16sp"
-                    tools:text="3 weeks"/>
+                    tools:text="333 years"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

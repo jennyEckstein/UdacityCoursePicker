@@ -75,10 +75,10 @@ public class DetailActivity extends AppCompatActivity
 
                     if("0".equals(currentVideoLike)) {
                         currentVideoLike = "1";
-                        fab.setImageDrawable(getResources().getDrawable(R.mipmap.fab_on));
+                        fab.setImageDrawable(getResources().getDrawable(R.drawable.fab_on));
                     }else{
                         currentVideoLike = "0";
-                        fab.setImageDrawable(getResources().getDrawable(R.mipmap.fab_off));
+                        fab.setImageDrawable(getResources().getDrawable(R.drawable.fab_off));
                     }
                     courseUpdateValues.put(CourseContract.Course.LIKED_COURSE, currentVideoLike);
                     Log.v(LOG_TAG, "LIKED: " + currentVideoLike);

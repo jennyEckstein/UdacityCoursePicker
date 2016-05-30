@@ -204,9 +204,9 @@ public class DetailActivityFragment extends Fragment
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         if (fab != null) {
             if ("1".equals(like)) {
-                fab.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.fab_on));
+                fab.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.fab_on));
             } else {
-                fab.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.fab_off));
+                fab.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.fab_off));
             }
         }
 
