@@ -247,9 +247,16 @@ public class DetailActivityFragment extends Fragment
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.v(LOG_TAG, "CREATED DETAIL FRAGMENT");
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-Log.v(LOG_TAG, "ON CREATE VIEW");
+
+        Log.v(LOG_TAG, "ON CREATE VIEW");
         //View activityView = inflater.inflate(R.layout.activity_detail, container, false);
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         this.durationTextView = (TextView) view.findViewById(R.id.duration);

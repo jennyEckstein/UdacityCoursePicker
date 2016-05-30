@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     String currentKey;
     String currentVideoLike;
     private ProgressBar spinner;
+    DetailActivityFragment detailActivityFragment;
 
     private static final String DETAIL_FRAGMENT_TAG = "DFTAG";
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity
 
         if(mTwoPane){
             Log.v(LOG_TAG, "CREATING DETAIL FRAGMENT ");
-            DetailActivityFragment detailActivityFragment =
+            this.detailActivityFragment =
                     new DetailActivityFragment();
             Bundle args = new Bundle();
             if(currentKey == null || "".equals(currentKey)){
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity
 
         if(mTwoPane){
             Log.v(LOG_TAG, "CREATING DETAIL FRAGMENT ");
-            DetailActivityFragment detailActivityFragment =
+            this.detailActivityFragment =
                     new DetailActivityFragment();
             Bundle args = new Bundle();
             if(currentKey == null || "".equals(currentKey)){
@@ -185,6 +186,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        this.detailActivityFragment = (DetailActivityFragment)
+                getFragmentManager().findFragmentByTag(DETAIL_FRAGMENT_TAG);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -195,7 +203,7 @@ public class MainActivity extends AppCompatActivity
             mTwoPane = true;
 Log.v(LOG_TAG, "TWO PANE");
             if(savedInstanceState == null){
-                DetailActivityFragment detailActivityFragment =
+                this.detailActivityFragment =
                         new DetailActivityFragment();
 
                 Bundle args = new Bundle();
