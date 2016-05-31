@@ -38,7 +38,7 @@ public class DetailActivityFragment extends Fragment
     OnDataPass dataPass;
     String url;
     String subtitle,durationUnit, expected_duration,level,required_knowledge,syllabus, faq;
-    private TextView durationTextView;
+    public TextView durationTextView;
 
     public interface OnDataPass{
         public void onDataPass(String data);
@@ -117,12 +117,18 @@ public class DetailActivityFragment extends Fragment
 
         Log.v(LOG_TAG, title + " | " + image + " | " + summary);
 
-        String dur = this.expected_duration + " " + this.durationUnit;
+        final String dur = this.expected_duration + " " + this.durationUnit;
         Log.v(LOG_TAG, "SETTING DURATION " + dur);
         if(dur != null || !"".equals(dur)) {
             if(durationTextView != null) {
                 Log.v(LOG_TAG, "SETTING TEXT VIEW " + dur);
-                durationTextView.setText(dur);
+                durationTextView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        durationTextView.setText(dur);
+                    }
+                });
+
             }
         }else{
             Log.v(LOG_TAG, "FAIL SETTING TEXT VIEW " + dur);

@@ -67,7 +67,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/fragment_detail_container">
@@ -76,14 +76,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="Hwlooe"/>-->
-            <fragment
+           <!-- <fragment
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:name="com.jennyeckstein.udacitycoursepicker.DetailActivityFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                />-->
 
-        </LinearLayout>
+        </FrameLayout>
     </android.support.v4.widget.NestedScrollView>
 
     <!--  <include layout="@layout/content_detail"/>
