@@ -40,7 +40,7 @@ public class NewCourseFragment extends Fragment implements LoaderManager.LoaderC
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Log.v(LOG_TAG, "ON CREATE LOADER");
+        //Log.v(LOG_TAG, "ON CREATE LOADER");
         String selection = CourseContract.Course.TABLE_NAME +
                 "." + CourseContract.Course.NEW_RELEASE + " = ?";
         String [] selectionArgs = {"true"};
@@ -52,8 +52,8 @@ public class NewCourseFragment extends Fragment implements LoaderManager.LoaderC
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        Log.v(LOG_TAG, "ON LOAD FINISHED");
-        Log.v(LOG_TAG, "Size: " + String.valueOf(data.getCount()));
+       // Log.v(LOG_TAG, "ON LOAD FINISHED");
+      //  Log.v(LOG_TAG, "Size: " + String.valueOf(data.getCount()));
 
         mCourseAdapter.swapCursor(data);
     }
@@ -85,12 +85,12 @@ public class NewCourseFragment extends Fragment implements LoaderManager.LoaderC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.v(LOG_TAG, "onCreateView");
+     //   Log.v(LOG_TAG, "onCreateView");
         mCourseAdapter = new CourseAdapter(getActivity(), null, 0);
         this.view = inflater.inflate(R.layout.fragment_main, container, false);
         ListView listView = (ListView) view.findViewById(R.id.courseView);
         listView.setAdapter(mCourseAdapter);
-        Log.v(LOG_TAG, "adapter set");
+     //   Log.v(LOG_TAG, "adapter set");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

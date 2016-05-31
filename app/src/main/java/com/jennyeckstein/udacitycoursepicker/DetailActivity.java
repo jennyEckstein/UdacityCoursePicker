@@ -28,7 +28,7 @@ public class DetailActivity extends AppCompatActivity
     @Override
     public void onDataPass(String data) {
         this.currentVideoLike = data;
-        Log.v(LOG_TAG, "LIKE PASSED: " + this.currentVideoLike);
+       // Log.v(LOG_TAG, "LIKE PASSED: " + this.currentVideoLike);
     }
 
     public CollapsingToolbarLayout getCollapsingToolbarLayout() {
@@ -81,7 +81,7 @@ public class DetailActivity extends AppCompatActivity
                         fab.setImageDrawable(getResources().getDrawable(R.drawable.fab_off));
                     }
                     courseUpdateValues.put(CourseContract.Course.LIKED_COURSE, currentVideoLike);
-                    Log.v(LOG_TAG, "LIKED: " + currentVideoLike);
+                 //   Log.v(LOG_TAG, "LIKED: " + currentVideoLike);
                     String selection =
                             CourseContract.Course.TABLE_NAME +
                                     "." + CourseContract.Course.KEY + " = ?";

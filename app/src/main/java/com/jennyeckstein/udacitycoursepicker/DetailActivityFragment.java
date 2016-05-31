@@ -10,6 +10,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,13 +73,13 @@ public class DetailActivityFragment extends Fragment
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         if (this.passedUri != null) {
-            Log.v(LOG_TAG, "creating loader: " + this.passedUri.toString());
+           // Log.v(LOG_TAG, "creating loader: " + this.passedUri.toString());
             String key = this.passedUri.getPathSegments().get(1);
             return new CursorLoader(
                     getActivity(), this.passedUri, null, null, new String[]{key}, null);
 
         }else{
-            Log.v(LOG_TAG, "creating loader, passedUri is empty");
+          //  Log.v(LOG_TAG, "creating loader, passedUri is empty");
             return null;
         }
     }
@@ -87,7 +88,7 @@ public class DetailActivityFragment extends Fragment
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 
         if(!data.moveToFirst()){
-            Log.v(LOG_TAG, "NO DATA RETURNED");
+         //   Log.v(LOG_TAG, "NO DATA RETURNED");
             return;
         }
         int keyColumn = data.getColumnIndex(CourseContract.Course.KEY);
@@ -179,7 +180,6 @@ public class DetailActivityFragment extends Fragment
 
        // getActivity().setTitle(title);
 
-/*
         CollapsingToolbarLayout collapsingToolbarLayout = ((DetailActivity) getActivity()).getCollapsingToolbarLayout();
                if(collapsingToolbarLayout != null){
                    Log.v(LOG_TAG, "SUCCESS");
@@ -187,7 +187,6 @@ public class DetailActivityFragment extends Fragment
                }else{
                    Log.v(LOG_TAG, "ITS NULLLLLLLLLL");
                }
-*/
 
 
        // ((DetailActivity)context).getSupportActionBar().setTitle(title);
@@ -239,7 +238,7 @@ public class DetailActivityFragment extends Fragment
             }
         }
 
-        Log.v(LOG_TAG, "ON LOAD FINISHED");
+    //    Log.v(LOG_TAG, "ON LOAD FINISHED");
     }
 
     @Override
@@ -255,15 +254,15 @@ public class DetailActivityFragment extends Fragment
         super.onActivityCreated(savedInstanceState);
         Bundle arguments = getArguments();
         if (arguments != null){
-            Log.v(LOG_TAG, "Setting passed URI");
+          //  Log.v(LOG_TAG, "Setting passed URI");
             this.passedUri = arguments.getParcelable(DetailActivityFragment.DETAIL_URI);
-            Log.v(LOG_TAG, "PASSES URI: " + this.passedUri);
+          //  Log.v(LOG_TAG, "PASSES URI: " + this.passedUri);
 
             //TODO: fix init loader
             getLoaderManager().initLoader(DETAIL_LOADER, null, this);
         }else{
             //TODO: take care of else case
-            Log.v(LOG_TAG, "NO ARGUMENTS - NO LOADER");
+         //   Log.v(LOG_TAG, "NO ARGUMENTS - NO LOADER");
         }
 
     }
@@ -278,7 +277,7 @@ public class DetailActivityFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.v(LOG_TAG, "CREATED DETAIL FRAGMENT");
+       // Log.v(LOG_TAG, "CREATED DETAIL FRAGMENT");
     }
 
     @Override

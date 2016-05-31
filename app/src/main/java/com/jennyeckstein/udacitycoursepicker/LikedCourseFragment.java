@@ -51,10 +51,10 @@ public class LikedCourseFragment extends Fragment
         if (!data.moveToFirst()){
             TextView textView = (TextView) getView().findViewById(R.id.no_data);
             textView.setText("No Liked Videos");
-            Log.v(LOG_TAG, "SETTING LIKED NONE");
+         //   Log.v(LOG_TAG, "SETTING LIKED NONE");
         }
         mCourseAdapter.swapCursor(data);
-        Log.v(LOG_TAG, "SETTING LIKED");
+       // Log.v(LOG_TAG, "SETTING LIKED");
     }
 
     @Override
@@ -77,12 +77,12 @@ public class LikedCourseFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.v(LOG_TAG, "onCreateView");
+     //   Log.v(LOG_TAG, "onCreateView");
         mCourseAdapter = new CourseAdapter(getActivity(), null, 0);
         this.view = inflater.inflate(R.layout.fragment_main, container, false);
         ListView listView = (ListView) view.findViewById(R.id.courseView);
         listView.setAdapter(mCourseAdapter);
-        Log.v(LOG_TAG, "adapter set");
+   //     Log.v(LOG_TAG, "adapter set");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

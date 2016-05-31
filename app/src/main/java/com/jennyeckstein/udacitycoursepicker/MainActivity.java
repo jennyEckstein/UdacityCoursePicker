@@ -44,25 +44,25 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onDataPass(String data) {
         this.currentVideoLike = data;
-        Log.v(LOG_TAG, "LIKE PASSED: " + this.currentVideoLike);
-        Log.v(LOG_TAG, "STOP SPINNER - data passed");
+       // Log.v(LOG_TAG, "LIKE PASSED: " + this.currentVideoLike);
+      //  Log.v(LOG_TAG, "STOP SPINNER - data passed");
         spinner.setVisibility(View.GONE);
     }
 
     @Override
     public void onFirstLoad(final String currentKey) {
-        Log.v(LOG_TAG, "STOP SPINNER - first load");
+      //  Log.v(LOG_TAG, "STOP SPINNER - first load");
         spinner.setVisibility(View.GONE);
         this.currentKey = currentKey;
-        Log.v(LOG_TAG, "Key Received by activity " + currentKey);
+      //  Log.v(LOG_TAG, "Key Received by activity " + currentKey);
 
         if(mTwoPane){
-            Log.v(LOG_TAG, "CREATING DETAIL FRAGMENT ");
+           // Log.v(LOG_TAG, "CREATING DETAIL FRAGMENT ");
             this.detailActivityFragment =
                     new DetailActivityFragment();
             Bundle args = new Bundle();
             if(currentKey == null || "".equals(currentKey)){
-                Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
+           //     Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
             }else {
                 final FloatingActionButton fab =
                         (FloatingActionButton) findViewById(R.id.fab);
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity
                                 fab.setImageDrawable(getResources().getDrawable(R.drawable.fab_off));
                             }
                             courseUpdateValues.put(CourseContract.Course.LIKED_COURSE, currentVideoLike);
-                            Log.v(LOG_TAG, "LIKED: " + currentVideoLike);
+                            //Log.v(LOG_TAG, "LIKED: " + currentVideoLike);
                             String selection =
                                     CourseContract.Course.TABLE_NAME +
                                             "." + CourseContract.Course.KEY + " = ?";
@@ -112,15 +112,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void sendCourseKeyToMainActivity(String courseKey) {
         this.currentKey = courseKey;
-        Log.v(LOG_TAG, "Key Received by activity " + courseKey);
+       // Log.v(LOG_TAG, "Key Received by activity " + courseKey);
 
         if(mTwoPane){
-            Log.v(LOG_TAG, "CREATING DETAIL FRAGMENT ");
+         //   Log.v(LOG_TAG, "CREATING DETAIL FRAGMENT ");
             this.detailActivityFragment =
                     new DetailActivityFragment();
             Bundle args = new Bundle();
             if(currentKey == null || "".equals(currentKey)){
-                Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
+           //     Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
             }else {
                 final FloatingActionButton fab =
                         (FloatingActionButton) findViewById(R.id.fab);
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity
                                 fab.setImageDrawable(getResources().getDrawable(R.drawable.fab_off));
                             }
                             courseUpdateValues.put(CourseContract.Course.LIKED_COURSE, currentVideoLike);
-                            Log.v(LOG_TAG, "LIKED: " + currentVideoLike);
+                         //   Log.v(LOG_TAG, "LIKED: " + currentVideoLike);
                             String selection =
                                     CourseContract.Course.TABLE_NAME +
                                             "." + CourseContract.Course.KEY + " = ?";
@@ -165,24 +165,24 @@ public class MainActivity extends AppCompatActivity
                         .commit();
             }
         }else{
-            Log.v(LOG_TAG, "ONE PANE sending intent");
+           // Log.v(LOG_TAG, "ONE PANE sending intent");
             Intent intent = new Intent(this, DetailActivity.class).setData(
                     CourseContract.Course.buildCourseWithId(currentKey));
             startActivity(intent);
         }
-        Log.v(LOG_TAG, "WE SHOULD HAVE OUR FRAGMENT ");
+       // Log.v(LOG_TAG, "WE SHOULD HAVE OUR FRAGMENT ");
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.v(LOG_TAG, "SAVE INSTANCE");
+      //  Log.v(LOG_TAG, "SAVE INSTANCE");
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        Log.v(LOG_TAG, "RESTORE INSTANCE");
+       // Log.v(LOG_TAG, "RESTORE INSTANCE");
     }
 
     @Override
@@ -201,14 +201,14 @@ public class MainActivity extends AppCompatActivity
 
         if(findViewById(R.id.fragment_detail_container) != null){
             mTwoPane = true;
-Log.v(LOG_TAG, "TWO PANE");
+//Log.v(LOG_TAG, "TWO PANE");
             if(savedInstanceState == null){
                 this.detailActivityFragment =
                         new DetailActivityFragment();
 
                 Bundle args = new Bundle();
                 if(currentKey == null || "".equals(currentKey)){
-                    Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
+                 //   Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
                 }
                 args.putParcelable(DetailActivityFragment.DETAIL_URI,
                         CourseContract.Course.buildCourseWithId(currentKey));
@@ -224,7 +224,7 @@ Log.v(LOG_TAG, "TWO PANE");
             }
 
         }else{
-            Log.v(LOG_TAG, "ONE PANE");
+           // Log.v(LOG_TAG, "ONE PANE");
             mTwoPane = false;
         }
 
@@ -250,7 +250,7 @@ Log.v(LOG_TAG, "TWO PANE");
        // no_internet_view.setVisibility(View.GONE);
 
         if(isNetworkAvailable()) {
-            Log.v(LOG_TAG, "SYNC IMMEDIATELY = SHOW SPINNER");
+         //   Log.v(LOG_TAG, "SYNC IMMEDIATELY = SHOW SPINNER");
             CourseSyncAdapter.syncImmediately(this);
             spinner.setVisibility(View.VISIBLE);
 

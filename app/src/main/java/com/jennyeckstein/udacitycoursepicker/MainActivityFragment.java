@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +55,7 @@ public class MainActivityFragment extends Fragment
 
     @Override
     public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Log.v(LOG_TAG, "ON CREATE LOADER");
+      //  Log.v(LOG_TAG, "ON CREATE LOADER");
         String selection = CourseContract.Course.TABLE_NAME +
                 "." + CourseContract.Course.LEVEL + " = ?";
         String [] selectionArgs = {"beginner"};
@@ -76,13 +75,13 @@ public class MainActivityFragment extends Fragment
 
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
-        Log.v(LOG_TAG, "ON LOAD FINISHED");
-        Log.v(LOG_TAG, "Size: " + String.valueOf(data.getCount()));
+       // Log.v(LOG_TAG, "ON LOAD FINISHED");
+       // Log.v(LOG_TAG, "Size: " + String.valueOf(data.getCount()));
 
         if(data.moveToFirst() == true){
             firstLoad(data.getString(data.getColumnIndex(CourseContract.Course.KEY)));
         }else{
-            Log.v(LOG_TAG, "FIRST LOAD - THERE IS NO KEY TO PASS");
+          //  Log.v(LOG_TAG, "FIRST LOAD - THERE IS NO KEY TO PASS");
         }
 
 
@@ -108,12 +107,12 @@ public class MainActivityFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-Log.v(LOG_TAG, "onCreateView");
+//Log.v(LOG_TAG, "onCreateView");
         mCourseAdapter = new CourseAdapter(getActivity(), null, 0);
         this.view = inflater.inflate(R.layout.fragment_main, container, false);
         ListView listView = (ListView) view.findViewById(R.id.courseView);
         listView.setAdapter(mCourseAdapter);
-        Log.v(LOG_TAG, "adapter set");
+   //     Log.v(LOG_TAG, "adapter set");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -126,7 +125,7 @@ Log.v(LOG_TAG, "onCreateView");
                     int courseKeyColumn = cursor.getColumnIndex(CourseContract.Course.KEY);
                     String courseKey = cursor.getString(courseKeyColumn);
                     sendToMain(courseKey);
-                    Log.v(LOG_TAG, "COURSE KEY SENT TO MAIN ACTIVITY " + courseKey);
+           //         Log.v(LOG_TAG, "COURSE KEY SENT TO MAIN ACTIVITY " + courseKey);
 
                     /*int courseKeyColumn = cursor.getColumnIndex(CourseContract.Course.KEY);
                     String courseKey = cursor.getString(courseKeyColumn);
