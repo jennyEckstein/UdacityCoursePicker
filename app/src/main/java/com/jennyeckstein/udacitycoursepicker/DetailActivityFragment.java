@@ -179,8 +179,14 @@ public class DetailActivityFragment extends Fragment
         syllabusTextView.setText(faq);*/
 
        // getActivity().setTitle(title);
+        CollapsingToolbarLayout collapsingToolbarLayout;
+        try{
+            collapsingToolbarLayout = ((DetailActivity) getActivity()).getCollapsingToolbarLayout();
+        }catch (ClassCastException e){
+            collapsingToolbarLayout = ((MainActivity) getActivity()).getCollapsingToolbarLayout();
+        }
 
-        CollapsingToolbarLayout collapsingToolbarLayout = ((DetailActivity) getActivity()).getCollapsingToolbarLayout();
+
                if(collapsingToolbarLayout != null){
                    Log.v(LOG_TAG, "SUCCESS");
                    collapsingToolbarLayout.setTitle(title);

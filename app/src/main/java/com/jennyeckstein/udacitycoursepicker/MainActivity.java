@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -37,8 +38,13 @@ public class MainActivity extends AppCompatActivity
     String currentVideoLike;
     private ProgressBar spinner;
     DetailActivityFragment detailActivityFragment;
+    CollapsingToolbarLayout collapsingToolbarLayout;
 
     private static final String DETAIL_FRAGMENT_TAG = "DFTAG";
+
+    public CollapsingToolbarLayout getCollapsingToolbarLayout() {
+        return collapsingToolbarLayout;
+    }
 
     @Override
     public void onDataPass(String data) {
@@ -199,6 +205,9 @@ public class MainActivity extends AppCompatActivity
         this.spinner = (ProgressBar) findViewById(R.id.progressBar1);
 
         if(findViewById(R.id.fragment_detail_container) != null){
+
+            this.collapsingToolbarLayout =
+                    (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
             mTwoPane = true;
 //Log.v(LOG_TAG, "TWO PANE");
             if(savedInstanceState == null){
