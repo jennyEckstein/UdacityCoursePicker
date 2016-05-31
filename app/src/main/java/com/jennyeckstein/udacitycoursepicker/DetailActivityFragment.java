@@ -107,12 +107,17 @@ public class DetailActivityFragment extends Fragment
 
        // Log.v(LOG_TAG, title + " | " + image + " | " + summary);
 
-        final String dur = this.expected_duration + " " + this.durationUnit;
+         String dur = this.expected_duration + " " + this.durationUnit;
+        if("0".equals(dur.trim())){
+            dur = "SHORT";
+        }else{
+            Log.v(LOG_TAG, "ITS |" + dur + "|");
+        }
 
         ViewHolder mViewHolder = (ViewHolder) getView().getTag();
        // mViewHolder.subtitleTextView.setText(this.subtitle);
         mViewHolder.durationTextView.setText(dur);
-        mViewHolder.levelTextView.setText(this.level);
+        mViewHolder.levelTextView.setText(this.level.toUpperCase());
         mViewHolder.requiredKnowledge.setText(this.required_knowledge);
         mViewHolder.summaryTextView.setText(this.summary);
         mViewHolder.syllabusTextView.setText(this.syllabus);

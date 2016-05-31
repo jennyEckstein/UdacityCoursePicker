@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 import com.jennyeckstein.udacitycoursepicker.sync.CourseSyncAdapter;
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity
                     new DetailActivityFragment();
             Bundle args = new Bundle();
             if(currentKey == null || "".equals(currentKey)){
-           //     Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
+                //Log.v(LOG_TAG, "THERE IS NO KEY TO PASS");
             }else {
                 final FloatingActionButton fab =
                         (FloatingActionButton) findViewById(R.id.fab);
@@ -269,13 +270,15 @@ public class MainActivity extends AppCompatActivity
        // no_internet_view.setVisibility(View.GONE);
 
         if(isNetworkAvailable()) {
+            Log.v(LOG_TAG, "YES INTERNET");
             CourseSyncAdapter.syncImmediately(this);
             spinner.setVisibility(View.VISIBLE);
 
-        }/*else{
-
-            no_internet_view.setText("No Internet Connection");
-        }*/
+        }else{
+            Log.v(LOG_TAG, "NO INTERNET");
+            TextView no_internet_text_view = (TextView)findViewById(R.id.no_data);
+            no_internet_text_view.setText("No Internet Connection");
+        }
 
    /*     Intent alarmIntent = new Intent(this, CourseService.AlarmReceiver.class);
         PendingIntent pendingIntent =
@@ -297,8 +300,9 @@ public class MainActivity extends AppCompatActivity
             ConnectivityManager connectivityManager =
                     (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
             //TODO check other valid connections
+            //TODO not working checking for networkaz
             NetworkInfo netInfo =
-                    connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                    connectivityManager.getActiveNetworkInfo();
             if(netInfo != null && netInfo.getState() == NetworkInfo.State.CONNECTED){
                 return true;
             }
