@@ -65,10 +65,13 @@ public class LikedCourseFragment extends Fragment
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        TextView textView = (TextView) getView().findViewById(R.id.no_data);
         if (!data.moveToFirst()){
-            TextView textView = (TextView) getView().findViewById(R.id.no_data);
+            textView.setVisibility(View.VISIBLE);
             textView.setText("No Liked Videos");
          //   Log.v(LOG_TAG, "SETTING LIKED NONE");
+        }else{
+            textView.setVisibility(View.GONE);
         }
         mCourseAdapter.swapCursor(data);
        // Log.v(LOG_TAG, "SETTING LIKED");

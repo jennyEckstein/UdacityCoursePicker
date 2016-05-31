@@ -7,22 +7,9 @@
     tools:context="com.jennyeckstein.udacitycoursepicker.MainActivityFragment"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/no_data"
-        android:layout_above="@+id/courseView"
-        android:textColor="@color/colorPrimaryDark"
-        />
 
-    <TextView
-        android:id="@+id/no_internet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/white"
-        android:textColor="@color/colorPrimaryDark"
-        android:gravity="center"/>
+
+
 
     <ListView
         android:id="@+id/courseView"
@@ -30,7 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_below="@+id/no_internet"
         tools:content="@layout/course_item"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/no_data"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/green"
+        />
 
 </RelativeLayout>
