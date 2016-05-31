@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 
@@ -69,9 +70,14 @@ public class ShortCourseFragment extends Fragment
 
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
-     //   Log.v(LOG_TAG, "ON LOAD FINISHED");
-      //  Log.v(LOG_TAG, "Size: " + String.valueOf(data.getCount()));
-
+        TextView textView = (TextView) getView().findViewById(R.id.no_data);
+        if (!data.moveToFirst()){
+            textView.setVisibility(View.VISIBLE);
+            textView.setText("No Short Courses");
+            //   Log.v(LOG_TAG, "SETTING LIKED NONE");
+        }else{
+            textView.setVisibility(View.GONE);
+        }
         mCourseAdapter.swapCursor(data);
     }
 

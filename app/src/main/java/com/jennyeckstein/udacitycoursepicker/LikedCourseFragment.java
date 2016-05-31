@@ -68,7 +68,7 @@ public class LikedCourseFragment extends Fragment
         TextView textView = (TextView) getView().findViewById(R.id.no_data);
         if (!data.moveToFirst()){
             textView.setVisibility(View.VISIBLE);
-            textView.setText("No Liked Videos");
+            textView.setText("No Liked Courses");
          //   Log.v(LOG_TAG, "SETTING LIKED NONE");
         }else{
             textView.setVisibility(View.GONE);
