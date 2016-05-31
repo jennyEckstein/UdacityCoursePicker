@@ -23,6 +23,9 @@ import com.jennyeckstein.udacitycoursepicker.sync.CourseSyncAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements MainActivityFragment.SendBackToMainActivity,
+                    NewCourseFragment.SendBackToMainActivity,
+                    ShortCourseFragment.SendBackToMainActivity,
+                    LikedCourseFragment.SendBackToMainActivity,
                     DetailActivityFragment.OnDataPass{
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();

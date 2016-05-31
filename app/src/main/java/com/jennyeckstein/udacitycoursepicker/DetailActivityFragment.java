@@ -38,29 +38,13 @@ public class DetailActivityFragment extends Fragment
     Context context;
     String title, image, summary;
     OnDataPass dataPass;
-    String url;
     String subtitle,durationUnit, expected_duration,level,
             required_knowledge,syllabus, faq, key;
 
-    public TextView durationTextView;
 
     public interface OnDataPass{
         public void onDataPass(String data);
     }
-
-/*
-    @Override
-    public void onStart() {
-        super.onStart();
-        this.dataPass = (OnDataPass) getActivity();
-    }
-*/
-
-/*    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        dataPass = (OnDataPass) context;
-    }*/
 
     public void passData(String data){
         dataPass.onDataPass(data);
@@ -143,43 +127,6 @@ public class DetailActivityFragment extends Fragment
             }
         });
 
-      /*  Log.v(LOG_TAG, "SETTING DURATION " + dur);
-        if(dur != null || !"".equals(dur)) {
-            if(durationTextView != null) {
-                Log.v(LOG_TAG, "SETTING TEXT VIEW " + dur);
-                durationTextView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        durationTextView.setText(dur);
-                    }
-                });
-
-            }
-        }else{
-            Log.v(LOG_TAG, "FAIL SETTING TEXT VIEW " + dur);
-        }*/
-
-       /* TextView levelTextView = (TextView) getView().findViewById(R.id.course_level);
-        levelTextView.setText(level);
-
-        TextView requiredKnowledgeTextView = (TextView) getView().findViewById(R.id.required_knowledge);
-        requiredKnowledgeTextView.setText(required_knowledge);
-*/
-/*
-        TextView summaryTextView = (TextView) getView().findViewById(R.id.summary);
-
-        if(summaryTextView != null) {
-            Log.v(LOG_TAG, "SUMMARY IS NOT NULL!!!!!!!!!!!");
-            Log.v(LOG_TAG, "SUMMARY: " + summary);
-            summaryTextView.setText(summary);
-        }else{
-            Log.v(LOG_TAG, "SUMMARY IS NULL!!!!!!!!!!!");
-        }
-*//*
-        TextView syllabusTextView = (TextView) getView().findViewById(R.id.syllabus);
-        syllabusTextView.setText(faq);*/
-
-       // getActivity().setTitle(title);
         CollapsingToolbarLayout collapsingToolbarLayout;
         try{
             collapsingToolbarLayout = ((DetailActivity) getActivity()).getCollapsingToolbarLayout();
@@ -197,44 +144,11 @@ public class DetailActivityFragment extends Fragment
                    Log.v(LOG_TAG, "ITS NULLLLLLLLLL");
                }
 
-
-       // ((DetailActivity)context).getSupportActionBar().setTitle(title);
-
-        /*CollapsingToolbarLayout collapsingToolbarLayout =
-                (CollapsingToolbarLayout) getView().findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle(title);*/
-        //((AppCompatActivity)this.getActivity()).setTitle(title);
-
-        //android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
-        //toolbar.setTitle(title);
-        //((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
-        //((DetailActivity)getActivity()).getSupportActionBar().setTitle(title);
-        //((DetailActivity)getActivity()).getActionBar().setTitle(title);
-
          ImageView imageView = (ImageView) getActivity().findViewById(R.id.detail_course_image_appBarLayout);
 
         if(imageView != null) {
             Picasso.with(context).load(image).networkPolicy(NetworkPolicy.OFFLINE).into(imageView);
         }
-   /*     TextView summaryView = (TextView) getView().findViewById(R.id.course_description);
-        summaryView.setText(summary);*/
-
-      //  TextView subtitleView = (TextView) getView().findViewById(R.id.course_subtitle);
-      //  subtitleView.setText(subtitle);
-
-      //  Button start_course_button = (Button) getView().findViewById(R.id.begin_course_button);
-        //todo add on click listener for the button
-       // start_course_button.setText(key);
-
-      //  url = data.getString(data.getColumnIndex(CourseContract.Course.HOMEPAGE));
-      //  start_course_button.setOnClickListener(new View.OnClickListener(){
-      /*      @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
-                startActivity(intent);
-            }
-        });*/
 
         String like = data.getString(data.getColumnIndex(CourseContract.Course.LIKED_COURSE));
         ((OnDataPass) getActivity()).onDataPass(like);
@@ -247,7 +161,6 @@ public class DetailActivityFragment extends Fragment
             }
         }
 
-    //    Log.v(LOG_TAG, "ON LOAD FINISHED");
     }
 
     @Override

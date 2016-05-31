@@ -107,16 +107,13 @@ public class MainActivityFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//Log.v(LOG_TAG, "onCreateView");
         mCourseAdapter = new CourseAdapter(getActivity(), null, 0);
         this.view = inflater.inflate(R.layout.fragment_main, container, false);
         ListView listView = (ListView) view.findViewById(R.id.courseView);
         listView.setAdapter(mCourseAdapter);
-   //     Log.v(LOG_TAG, "adapter set");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              //  Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle();
 
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 if (cursor != null) {
@@ -125,13 +122,6 @@ public class MainActivityFragment extends Fragment
                     int courseKeyColumn = cursor.getColumnIndex(CourseContract.Course.KEY);
                     String courseKey = cursor.getString(courseKeyColumn);
                     sendToMain(courseKey);
-           //         Log.v(LOG_TAG, "COURSE KEY SENT TO MAIN ACTIVITY " + courseKey);
-
-                    /*int courseKeyColumn = cursor.getColumnIndex(CourseContract.Course.KEY);
-                    String courseKey = cursor.getString(courseKeyColumn);
-                    Intent intent = new Intent(getActivity(), DetailActivity.class)
-                            .setData(CourseContract.Course.buildCourseWithId(courseKey));
-                    getActivity().startActivity(intent, bundle);*/
                 }
 
             }

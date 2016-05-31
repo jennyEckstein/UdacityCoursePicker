@@ -1,8 +1,7 @@
 package com.jennyeckstein.udacitycoursepicker;
 
 
-import android.app.ActivityOptions;
-import android.content.Intent;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +30,27 @@ public class LikedCourseFragment extends Fragment
     private static final int LIKED_COURSE_LOADER = 202;
     private View view;
     private CourseAdapter mCourseAdapter;
+    SendBackToMainActivity sendBackToMainActivity;
+
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
 
+    public interface SendBackToMainActivity{
+        public void sendCourseKeyToMainActivity(String courseKey);
+        public void onFirstLoad(String currentKey);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        sendBackToMainActivity = (SendBackToMainActivity) context;
+    }
+
+    public void sendToMain(String courseKey){
+        sendBackToMainActivity.sendCourseKeyToMainActivity(courseKey);
+    }
+    public void firstLoad(String courseKey){
+        sendBackToMainActivity.onFirstLoad(courseKey);
+    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -77,16 +94,13 @@ public class LikedCourseFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-     //   Log.v(LOG_TAG, "onCreateView");
         mCourseAdapter = new CourseAdapter(getActivity(), null, 0);
         this.view = inflater.inflate(R.layout.fragment_main, container, false);
         ListView listView = (ListView) view.findViewById(R.id.courseView);
         listView.setAdapter(mCourseAdapter);
-   //     Log.v(LOG_TAG, "adapter set");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle();
 
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 if (cursor != null) {
@@ -94,9 +108,7 @@ public class LikedCourseFragment extends Fragment
                             PreferenceManager.getDefaultSharedPreferences(getActivity());
                     int courseKeyColumn = cursor.getColumnIndex(CourseContract.Course.KEY);
                     String courseKey = cursor.getString(courseKeyColumn);
-                    Intent intent = new Intent(getActivity(), DetailActivity.class)
-                            .setData(CourseContract.Course.buildCourseWithId(courseKey));
-                    getActivity().startActivity(intent, bundle);
+                    sendToMain(courseKey);
                 }
 
             }
