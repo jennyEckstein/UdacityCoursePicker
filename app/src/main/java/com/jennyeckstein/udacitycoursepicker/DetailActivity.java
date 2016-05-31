@@ -24,6 +24,16 @@ public class DetailActivity extends AppCompatActivity
     CollapsingToolbarLayout collapsingToolbarLayout;
     String currentKey;
     String currentVideoLike;
+    DetailToMain mDetailToMain;
+
+    public interface DetailToMain{
+        public void justLikedCourseKey(String key);
+    }
+
+    public void sendKey(String key){
+        this.mDetailToMain.justLikedCourseKey(key);
+    }
+
 
     @Override
     public void onDataPass(String data) {
@@ -69,8 +79,6 @@ public class DetailActivity extends AppCompatActivity
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();*/
                     ContentValues courseUpdateValues = new ContentValues();
 
                     if("0".equals(currentVideoLike)) {
@@ -86,12 +94,15 @@ public class DetailActivity extends AppCompatActivity
                             CourseContract.Course.TABLE_NAME +
                                     "." + CourseContract.Course.KEY + " = ?";
                     String[] selectionArgs = {currentKey};
+                    Log.v(LOG_TAG, "SENDING LIKE");
+                    //((DetailToMain) getBaseContext()).justLikedCourseKey(currentKey);
 
                     getContentResolver().update(
                             CourseContract.Course.buildCourseWithId(currentKey),
                             courseUpdateValues,
                             selection,
                             selectionArgs);
+
                 }
             });
         }

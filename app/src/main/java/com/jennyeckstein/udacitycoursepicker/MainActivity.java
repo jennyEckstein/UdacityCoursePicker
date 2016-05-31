@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity
                     NewCourseFragment.SendBackToMainActivity,
                     ShortCourseFragment.SendBackToMainActivity,
                     LikedCourseFragment.SendBackToMainActivity,
+                    DetailActivity.DetailToMain,
                     DetailActivityFragment.OnDataPass{
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -44,6 +46,12 @@ public class MainActivity extends AppCompatActivity
     CollapsingToolbarLayout collapsingToolbarLayout;
 
     private static final String DETAIL_FRAGMENT_TAG = "DFTAG";
+
+    @Override
+    public void justLikedCourseKey(String key) {
+        this.currentKey = key;
+        Log.v(LOG_TAG, "JUST LIKED KEY " + key);
+    }
 
     public CollapsingToolbarLayout getCollapsingToolbarLayout() {
         return collapsingToolbarLayout;
