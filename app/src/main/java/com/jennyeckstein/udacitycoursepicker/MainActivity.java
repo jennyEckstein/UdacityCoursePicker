@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -250,7 +249,6 @@ public class MainActivity extends AppCompatActivity
        // no_internet_view.setVisibility(View.GONE);
 
         if(isNetworkAvailable()) {
-         //   Log.v(LOG_TAG, "SYNC IMMEDIATELY = SHOW SPINNER");
             CourseSyncAdapter.syncImmediately(this);
             spinner.setVisibility(View.VISIBLE);
 

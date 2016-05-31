@@ -42,7 +42,7 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
 
     // Interval at which to sync with the weather, in milliseconds.
 // 60 seconds (1 minute)  180 = 3 hours
-    public static final int SYNC_INTERVAL = 60 * 180;
+    public static final int SYNC_INTERVAL = 60 * 720;
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL/3;
 
     public CourseSyncAdapter(Context context, boolean autoInitialize) {
