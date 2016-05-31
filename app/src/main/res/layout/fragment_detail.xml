@@ -22,7 +22,7 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/course_subtitle"
+                    android:id="@+id/subtitle"
                     tools:text="How to Make an Android App"/>
 
                 <LinearLayout
@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:id="@+id/course_layout_detail"
-                    android:layout_below="@id/course_subtitle"
+                    android:layout_below="@id/subtitle"
                    >
 
                 <TextView
@@ -45,14 +45,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/course_level"
+                    android:id="@+id/level"
                     tools:text="ADVANCED"/>
             </LinearLayout>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/begin_course_button"
+                android:id="@+id/begin_course"
                 android:text="Go to Udacity"
                 android:layout_below="@+id/course_layout_detail"/>
 
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/required_knowledge"
-                android:layout_below="@id/begin_course_button"
+                android:layout_below="@id/begin_course"
                 tools:text="If you are new to programming and don’t know where to start"
                 />
 

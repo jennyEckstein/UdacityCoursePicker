@@ -273,4 +273,32 @@ public class DetailActivityFragment extends Fragment
         //((DetailActivity)getActivity()).getActionBar().setTitle(title);
         return view;
     }
+
+
+    public static class ViewHolder{
+        public TextView subtitleTextView;
+        public TextView durationTextView;
+        public TextView levelTextView;
+        public Button beginCourseButton;
+        public TextView requiredKnowledge;
+        public TextView summaryTextView;
+        public TextView syllabusTextView;
+        public TextView faqTextView;
+
+        public ViewHolder(View view, int layoutId){
+            this.subtitleTextView = (TextView) view.findViewById(R.id.subtitle);
+            this.durationTextView = (TextView) view.findViewById(R.id.duration);
+            this.levelTextView = (TextView) view.findViewById(R.id.level);
+            this.beginCourseButton = (Button) view.findViewById(R.id.begin_course);
+            this.requiredKnowledge = (TextView) view.findViewById(R.id.required_knowledge);
+            this.summaryTextView = (TextView) view.findViewById(R.id.summary);
+            this.syllabusTextView = (TextView) view.findViewById(R.id.syllabus);
+            this.faqTextView = (TextView) view.findViewById(R.id.fab);
+        }
+
+
+
+    }
+
+
 }
