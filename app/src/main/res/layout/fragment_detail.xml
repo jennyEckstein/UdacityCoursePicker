@@ -5,11 +5,7 @@
     android:layout_margin="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jennyeckstein.udacitycoursepicker.DetailActivityFragment"
-
-    >
-
-
+    tools:context="com.jennyeckstein.udacitycoursepicker.DetailActivityFragment">
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -90,7 +86,7 @@
 
             <TextView
                 android:id="@+id/syllabus_header"
-                android:theme="@style/Udacity_Detail_Header.SYLLABUS_HEADER"
+                android:theme="@style/Udacity_Detail_Headers.SYLLABUS_HEADER"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -111,9 +107,6 @@
                 android:theme="@style/Udacity_Detail_Text_Lots"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
-
-
-
     </LinearLayout>
     </ScrollView>
 </RelativeLayout>

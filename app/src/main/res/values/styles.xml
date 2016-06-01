@@ -80,6 +80,7 @@
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:layout_marginTop">8dp</item>
+        <item name="android:visibility">invisible</item>
     </style>
 
     <style name="Udacity_Detail_Headers.REQUIRED_KNOWLEDGE_HEADER">
