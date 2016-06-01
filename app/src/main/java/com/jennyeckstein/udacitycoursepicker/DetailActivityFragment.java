@@ -1,6 +1,7 @@
 package com.jennyeckstein.udacitycoursepicker;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -180,10 +181,16 @@ public class DetailActivityFragment extends Fragment
                    collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
                }
 
-         ImageView imageView = (ImageView) getActivity().findViewById(R.id.detail_course_image_appBarLayout);
+         //ImageView imageView = (ImageView) getActivity().findViewById(R.id.detail_course_image_appBarLayout);
 
-        if(imageView != null) {
-            Picasso.with(context).load(image).networkPolicy(NetworkPolicy.OFFLINE).into(imageView);
+        if(mViewHolder.courseImageView != null) {
+            if(!"".equals(image.trim())){
+                Picasso.with(context).load(image).networkPolicy(NetworkPolicy.OFFLINE).into(mViewHolder.courseImageView);
+            }else{
+                //TODO: replace with some generic "no image"
+                Picasso.with(context).load(R.drawable.course_test_image).into(mViewHolder.courseImageView);
+            }
+
         }
 
         String like = data.getString(data.getColumnIndex(CourseContract.Course.LIKED_COURSE));
@@ -244,13 +251,14 @@ public class DetailActivityFragment extends Fragment
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
-        ViewHolder mViewHolder = new ViewHolder(view, 0);
+        ViewHolder mViewHolder = new ViewHolder(view, 0, getActivity());
         view.setTag(mViewHolder);
         return view;
     }
 
 
     public static class ViewHolder{
+        public ImageView courseImageView;
         public TextView subtitleTextView;
         public TextView durationTextView;
         public TextView levelTextView;
@@ -267,7 +275,8 @@ public class DetailActivityFragment extends Fragment
                 required_knowledge_header;
 
 
-        public ViewHolder(View view, int layoutId){
+        public ViewHolder(View view, int layoutId, Activity activity){
+            this.courseImageView = (ImageView) activity.findViewById(R.id.detail_course_image_appBarLayout);
             this.subtitleTextView = (TextView) view.findViewById(R.id.subtitle);
             this.durationTextView = (TextView) view.findViewById(R.id.duration);
             this.levelTextView = (TextView) view.findViewById(R.id.level);

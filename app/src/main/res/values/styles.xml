@@ -72,9 +72,29 @@
         <item name="android:background">@color/colorPrimaryDark</item>
         <item name="android:text">@string/take_course_message_button</item>
     </style>
-    <style name="Udacity_Detail_Buttons.SHARE">
-        <item name="android:background">@color/colorPrimaryDark</item>
-        <item name="android:text">@string/button_share</item>
+
+    <style name="Udacity_Detail_Headers">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
     </style>
 
+    <style name="Udacity_Detail_Headers.REQUIRED_KNOWLEDGE_HEADER">
+        <item name="android:text">@string/required_knowledge_header</item>
+    </style>
+
+    <style name="Udacity_Detail_Headers.SUMMARY_HEADER">
+        <item name="android:text">@string/summary_header</item>
+    </style>
+
+    <style name="Udacity_Detail_Headers.SYLLABUS_HEADER">
+        <item name="android:text">@string/syllabus_header</item>
+    </style>
+
+    <style name="Udacity_Detail_Headers.FAQ_HEADER">
+        <item name="android:text">@string/faq_header</item>
+    </style>
 </resources>
