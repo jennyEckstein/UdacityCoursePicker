@@ -63,28 +63,20 @@
               android:layout_height="match_parent"
               android:orientation="horizontal"
               android:layout_margin="4dp">
+
               <Button
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:background="@color/colorAccent"
-                  android:elevation="2dp"
-                  android:textColor="@color/white"
-                  android:layout_margin="10dp"
-                  android:textSize="18sp"
                   android:id="@+id/begin_course"
-                  android:layout_weight="1"
-                  android:text="@string/take_course_message_button"/>
-              <Button
+                  android:theme="@style/Udacity_Detail_Buttons_GO_TO_COURSE"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:background="@color/colorPrimaryDark"
-                  android:elevation="2dp"
-                  android:textColor="@color/white"
-                  android:layout_margin="10dp"
-                  android:textSize="18sp"
+                  android:layout_weight="1"/>
+
+              <Button
                   android:id="@+id/share_button"
-                  android:layout_weight="1"
-                  android:text="@string/button_share"/>
+                  android:theme="@style/Udacity_Detail_Buttons.SHARE"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"/>
 
           </LinearLayout>
 

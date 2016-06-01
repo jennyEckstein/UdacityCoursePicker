@@ -50,8 +50,6 @@
         <item name="android:elevation">2dp</item>
     </style>
 
-
-
     <style name="Udacity_List_Item">
         <item name="android:padding">4dp</item>
     </style>
@@ -60,6 +58,23 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/orange</item>
+    </style>
+
+    <style name="Udacity_Detail_Buttons">
+        <item name="android:elevation">2dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Udacity_Detail_Buttons.GO_TO_COURSE">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:text">@string/take_course_message_button</item>
+    </style>
+    <style name="Udacity_Detail_Buttons.SHARE">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:text">@string/button_share</item>
     </style>
 
 </resources>
