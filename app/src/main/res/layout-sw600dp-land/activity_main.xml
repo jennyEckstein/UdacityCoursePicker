@@ -21,6 +21,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:theme="@style/Udacity_AppBar"
             android:background="@color/white"
+            android:elevation="6dp"
             >
 
             <include
@@ -32,7 +33,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tabLayout"
-                android:theme="@style/Udacity_TabBar"
+                android:background="@color/colorAccent"
+                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabSelectedTextColor="@color/white"
+                app:tabIndicatorHeight="4dp"
+                app:tabTextColor="@color/white"
                 app:tabMode="fixed"
                 app:tabGravity="fill">
 
@@ -68,7 +73,8 @@
     <FrameLayout
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
         <android.support.design.widget.CoordinatorLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -82,6 +88,7 @@
             <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="256dp"
+                android:elevation="6dp"
                 >
 
                 <android.support.design.widget.CollapsingToolbarLayout
@@ -89,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                    app:contentScrim="?attr/colorPrimaryDark"
+                    app:contentScrim="?attr/colorPrimary"
                     >
 
 
@@ -122,7 +129,7 @@
                     <android.support.v7.widget.Toolbar
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
-                        android:textSize="14sp"
+                        android:titleTextColor="@color/white"
                         android:layout_height="?attr/actionBarSize"
                         app:layout_collapseMode="pin"
                         android:elevation="4dp"
@@ -168,7 +175,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"/>
+                android:layout_margin="@dimen/fab_margin"
+                android:src="@drawable/fab_off"/>
 
         </android.support.design.widget.CoordinatorLayout>
         </FrameLayout>

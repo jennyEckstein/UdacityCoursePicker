@@ -310,11 +310,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        if(mTwoPane){
-            return true;
-        }else {
+
             return false;
-        }
     }
 
     @Override
@@ -324,17 +321,12 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if(mTwoPane) {
+
             //noinspection SimplifiableIfStatement
             if (id == R.id.action_share) {
-                //TODO: in the future it should share course title and other useful info
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "Awesome Course #UdacityCoursePicker");
-                shareIntent.setType("text/plain");
-                startActivity(shareIntent);
+
             }
-        }
+
         return super.onOptionsItemSelected(item);
     }
 }

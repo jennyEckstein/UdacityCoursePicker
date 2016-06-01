@@ -114,7 +114,7 @@ public class DetailActivityFragment extends Fragment
         }
 
         ViewHolder mViewHolder = (ViewHolder) getView().getTag();
-       // mViewHolder.subtitleTextView.setText(this.subtitle);
+        mViewHolder.subtitleTextView.setText(this.title);
         mViewHolder.durationTextView.setText(dur);
         mViewHolder.levelTextView.setText(this.level.toUpperCase());
 
@@ -152,6 +152,19 @@ public class DetailActivityFragment extends Fragment
             }
         });
 
+        if(mViewHolder.shareButton != null){
+            mViewHolder.shareButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent shareIntent = new Intent();
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, "Awesome Course #UdacityCoursePicker");
+                    shareIntent.setType("text/plain");
+                    startActivity(shareIntent);
+                }
+            });
+        }
+
         CollapsingToolbarLayout collapsingToolbarLayout;
         try{
             collapsingToolbarLayout = ((DetailActivity) getActivity()).getCollapsingToolbarLayout();
@@ -162,7 +175,7 @@ public class DetailActivityFragment extends Fragment
 
                if(collapsingToolbarLayout != null){
                  //  Log.v(LOG_TAG, "SUCCESS");
-                   collapsingToolbarLayout.setTitle(title);
+                   collapsingToolbarLayout.setTitle(this.key.toUpperCase());
                    collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
                    collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
                }
@@ -242,6 +255,7 @@ public class DetailActivityFragment extends Fragment
         public TextView durationTextView;
         public TextView levelTextView;
         public Button beginCourseButton;
+        public Button shareButton;
         public TextView requiredKnowledge;
         public TextView summaryTextView;
         public TextView syllabusTextView;
@@ -252,11 +266,13 @@ public class DetailActivityFragment extends Fragment
                 summary_header,
                 required_knowledge_header;
 
+
         public ViewHolder(View view, int layoutId){
             this.subtitleTextView = (TextView) view.findViewById(R.id.subtitle);
             this.durationTextView = (TextView) view.findViewById(R.id.duration);
             this.levelTextView = (TextView) view.findViewById(R.id.level);
             this.beginCourseButton = (Button) view.findViewById(R.id.begin_course);
+            this.shareButton = (Button) view.findViewById(R.id.share_button);
             this.requiredKnowledge = (TextView) view.findViewById(R.id.required_knowledge);
             this.summaryTextView = (TextView) view.findViewById(R.id.summary);
             this.syllabusTextView = (TextView) view.findViewById(R.id.syllabus);

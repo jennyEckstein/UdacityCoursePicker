@@ -8,6 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/Udacity_AppBar"
     android:background="@color/white"
+    android:elevation="6dp"
     >
 
         <include
@@ -19,7 +20,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tabLayout"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorAccent"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorHeight="4dp"
+            app:tabTextColor="@color/white"
             app:tabMode="fixed"
             app:tabGravity="fill">
 
