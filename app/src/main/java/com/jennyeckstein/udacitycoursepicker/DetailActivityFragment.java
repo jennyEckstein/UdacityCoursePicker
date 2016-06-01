@@ -44,6 +44,7 @@ public class DetailActivityFragment extends Fragment
 
     public interface OnDataPass{
         public void onDataPass(String data);
+        public void setKey(String data);
     }
 
     public void passData(String data){
@@ -58,7 +59,7 @@ public class DetailActivityFragment extends Fragment
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         if (this.passedUri != null) {
-           // Log.v(LOG_TAG, "creating loader: " + this.passedUri.toString());
+            Log.v(LOG_TAG, "PASSED uri: " + this.passedUri.toString());
             String key = this.passedUri.getPathSegments().get(1);
             return new CursorLoader(
                     getActivity(), this.passedUri, null, null, new String[]{key}, null);
@@ -136,10 +137,8 @@ public class DetailActivityFragment extends Fragment
             mViewHolder.syllabus_header.setVisibility(View.VISIBLE);
         }
         if("".equals(this.faq.trim())){
-            Log.v(LOG_TAG, "FAQ1:" + this.faq + "|");
             mViewHolder.faq_header.setVisibility(View.GONE);
         }else {
-            Log.v(LOG_TAG, "FAQ2:" + this.faq + "|");
             mViewHolder.faqTextView.setText(this.faq);
             mViewHolder.faq_header.setVisibility(View.VISIBLE);
         }
@@ -162,12 +161,10 @@ public class DetailActivityFragment extends Fragment
 
 
                if(collapsingToolbarLayout != null){
-                   Log.v(LOG_TAG, "SUCCESS");
+                 //  Log.v(LOG_TAG, "SUCCESS");
                    collapsingToolbarLayout.setTitle(title);
                    collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
                    collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
-               }else{
-                   Log.v(LOG_TAG, "ITS NULLLLLLLLLL");
                }
 
          ImageView imageView = (ImageView) getActivity().findViewById(R.id.detail_course_image_appBarLayout);
@@ -178,6 +175,7 @@ public class DetailActivityFragment extends Fragment
 
         String like = data.getString(data.getColumnIndex(CourseContract.Course.LIKED_COURSE));
         ((OnDataPass) getActivity()).onDataPass(like);
+        ((OnDataPass) getActivity()).setKey(this.key);
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         if (fab != null) {
             if ("1".equals(like)) {
@@ -202,7 +200,7 @@ public class DetailActivityFragment extends Fragment
         super.onActivityCreated(savedInstanceState);
         Bundle arguments = getArguments();
         if (arguments != null){
-          //  Log.v(LOG_TAG, "Setting passed URI");
+        //    Log.v(LOG_TAG, "Setting passed URI");
             this.passedUri = arguments.getParcelable(DetailActivityFragment.DETAIL_URI);
           //  Log.v(LOG_TAG, "PASSES URI: " + this.passedUri);
 

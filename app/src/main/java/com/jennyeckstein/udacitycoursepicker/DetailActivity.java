@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ActionProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +33,10 @@ public class DetailActivity extends AppCompatActivity
         this.mDetailToMain.justLikedCourseKey(key);
     }
 
+    @Override
+    public void setKey(String data) {
+        this.currentKey = data;
+    }
 
     @Override
     public void onDataPass(String data) {
@@ -52,6 +55,8 @@ public class DetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_detail);
 
         Bundle arguments = new Bundle();
+
+
         arguments.putParcelable(DetailActivityFragment.DETAIL_URI, getIntent().getData());
         this.currentKey = getIntent().getData().getPathSegments().get(1);
         DetailActivityFragment fragment = new DetailActivityFragment();
@@ -94,7 +99,7 @@ public class DetailActivity extends AppCompatActivity
                             CourseContract.Course.TABLE_NAME +
                                     "." + CourseContract.Course.KEY + " = ?";
                     String[] selectionArgs = {currentKey};
-                    Log.v(LOG_TAG, "SENDING LIKE");
+                    //Log.v(LOG_TAG, "SENDING LIKE");
                     //((DetailToMain) getBaseContext()).justLikedCourseKey(currentKey);
 
                     getContentResolver().update(
