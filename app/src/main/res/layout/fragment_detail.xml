@@ -71,11 +71,10 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:id="@+id/required_knowledge"
-                tools:text="If you are new to programming and don’t know where to start"
-                />
+                android:theme="@style/Udacity_Detail_Text_Lots"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:id="@+id/summary_header"
@@ -84,20 +83,22 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/summary"
+                android:theme="@style/Udacity_Detail_Text_Lots"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/summary"/>
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:id="@+id/syllabus_header"
-                android:theme="@style/Udacity_Detail_Headers.SYLLABUS_HEADER"
+                android:theme="@style/Udacity_Detail_Header.SYLLABUS_HEADER"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/syllabus"
+                android:theme="@style/Udacity_Detail_Text_Lots"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/syllabus"/>
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:id="@+id/faq_header"
@@ -106,9 +107,10 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/faq"
+                android:theme="@style/Udacity_Detail_Text_Lots"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/faq"/>
+                android:layout_height="match_parent"/>
 
 
 

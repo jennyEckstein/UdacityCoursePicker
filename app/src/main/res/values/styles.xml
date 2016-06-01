@@ -97,4 +97,10 @@
     <style name="Udacity_Detail_Headers.FAQ_HEADER">
         <item name="android:text">@string/faq_header</item>
     </style>
+
+    <style name="Udacity_Detail_Text_Lots">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="tools:text">@string/lorem_ipsum</item>
+    </style>
 </resources>
