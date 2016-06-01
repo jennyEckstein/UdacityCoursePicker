@@ -247,10 +247,14 @@ public class MainActivity extends AppCompatActivity
         viewPager = (ViewPager)findViewById(R.id.viewPager);
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragments(new MainActivityFragment(), "Begginer");
-        viewPagerAdapter.addFragments(new NewCourseFragment(), "New");
-        viewPagerAdapter.addFragments(new ShortCourseFragment(), "Short");
-        viewPagerAdapter.addFragments(new LikedCourseFragment(), "Liked");
+        viewPagerAdapter.addFragments(
+                new MainActivityFragment(), getResources().getString(R.string.beginner_tab));
+        viewPagerAdapter.addFragments(
+                new NewCourseFragment(), getResources().getString(R.string.new_tab));
+        viewPagerAdapter.addFragments(
+                new ShortCourseFragment(), getResources().getString(R.string.short_tab));
+        viewPagerAdapter.addFragments(
+                new LikedCourseFragment(), getResources().getString(R.string.liked_tab));
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);

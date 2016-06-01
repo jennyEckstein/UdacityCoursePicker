@@ -11,4 +11,18 @@
     <!-- SyncAdapter related -->
     <string name="sync_account_type">jennyeckstein.com</string>
     <string name="content_authority">com.jennyeckstein.udacitycoursepicker</string>
+
+    <string name="no_internet_connection_message">No Internet Connection</string>
+
+    <string name="take_course_message_button">Go to Udacity</string>
+
+    <string name="required_knowledge_header">REQUIRED KNOWLEDGE</string>
+    <string name="summary_header">SUMMARY</string>
+    <string name="syllabus_header">SYLLABUS</string>
+    <string name="faq_header">FAQ</string>
+
+    <string name="beginner_tab">Beginner</string>
+    <string name="new_tab">New</string>
+    <string name="short_tab">Short</string>
+    <string name="liked_tab">Liked</string>
 </resources>
