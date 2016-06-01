@@ -129,9 +129,7 @@ public class DetailActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }else if(id == R.id.action_share){
+         if(id == R.id.action_share){
             //TODO: in the future it should share course title and other useful info
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);

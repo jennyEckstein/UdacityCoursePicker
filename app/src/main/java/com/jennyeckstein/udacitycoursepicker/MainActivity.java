@@ -324,11 +324,17 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return false;
+        if(mTwoPane) {
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_share) {
+                //TODO: in the future it should share course title and other useful info
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Awesome Course #UdacityCoursePicker");
+                shareIntent.setType("text/plain");
+                startActivity(shareIntent);
+            }
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

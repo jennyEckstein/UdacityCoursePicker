@@ -1,8 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.jennyeckstein.udacitycoursepicker.DetailActivity">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.jennyeckstein.udacitycoursepicker.MainActivity">
     <item
         android:id="@+id/action_share"
         app:showAsAction="ifRoom"
