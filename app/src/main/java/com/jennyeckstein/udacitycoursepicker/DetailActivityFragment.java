@@ -110,18 +110,39 @@ public class DetailActivityFragment extends Fragment
          String dur = this.expected_duration + " " + this.durationUnit;
         if("0".equals(dur.trim())){
             dur = "SHORT";
-        }else{
-            Log.v(LOG_TAG, "ITS |" + dur + "|");
         }
 
         ViewHolder mViewHolder = (ViewHolder) getView().getTag();
        // mViewHolder.subtitleTextView.setText(this.subtitle);
         mViewHolder.durationTextView.setText(dur);
         mViewHolder.levelTextView.setText(this.level.toUpperCase());
-        mViewHolder.requiredKnowledge.setText(this.required_knowledge);
-        mViewHolder.summaryTextView.setText(this.summary);
-        mViewHolder.syllabusTextView.setText(this.syllabus);
-        mViewHolder.faqTextView.setText(this.faq);
+
+        if("".equals(this.required_knowledge.trim())){
+            mViewHolder.required_knowledge_header.setVisibility(View.GONE);
+        }else {
+            mViewHolder.requiredKnowledge.setText(this.required_knowledge);
+            mViewHolder.required_knowledge_header.setVisibility(View.VISIBLE);
+        }
+        if("".equals(this.summary.trim())){
+            mViewHolder.summary_header.setVisibility(View.GONE);
+        }else {
+            mViewHolder.summaryTextView.setText(this.summary);
+            mViewHolder.summary_header.setVisibility(View.VISIBLE);
+        }
+        if("".equals(this.syllabus.trim())) {
+            mViewHolder.syllabus_header.setVisibility(View.GONE);
+        }else{
+            mViewHolder.syllabusTextView.setText(this.syllabus);
+            mViewHolder.syllabus_header.setVisibility(View.VISIBLE);
+        }
+        if("".equals(this.faq.trim())){
+            Log.v(LOG_TAG, "FAQ1:" + this.faq + "|");
+            mViewHolder.faq_header.setVisibility(View.GONE);
+        }else {
+            Log.v(LOG_TAG, "FAQ2:" + this.faq + "|");
+            mViewHolder.faqTextView.setText(this.faq);
+            mViewHolder.faq_header.setVisibility(View.VISIBLE);
+        }
 
         mViewHolder.beginCourseButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -228,6 +249,11 @@ public class DetailActivityFragment extends Fragment
         public TextView syllabusTextView;
         public TextView faqTextView;
 
+        public TextView faq_header,
+                syllabus_header,
+                summary_header,
+                required_knowledge_header;
+
         public ViewHolder(View view, int layoutId){
             this.subtitleTextView = (TextView) view.findViewById(R.id.subtitle);
             this.durationTextView = (TextView) view.findViewById(R.id.duration);
@@ -237,6 +263,11 @@ public class DetailActivityFragment extends Fragment
             this.summaryTextView = (TextView) view.findViewById(R.id.summary);
             this.syllabusTextView = (TextView) view.findViewById(R.id.syllabus);
             this.faqTextView = (TextView) view.findViewById(R.id.faq);
+
+            this.faq_header = (TextView) view.findViewById(R.id.faq_header);
+            this.syllabus_header = (TextView) view.findViewById(R.id.syllabus_header);
+            this.summary_header = (TextView) view.findViewById(R.id.summary_header);
+            this.required_knowledge_header = (TextView) view.findViewById(R.id.required_knowledge_header);
         }
 
 
