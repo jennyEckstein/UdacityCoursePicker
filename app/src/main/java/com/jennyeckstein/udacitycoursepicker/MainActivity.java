@@ -12,7 +12,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -261,15 +260,18 @@ public class MainActivity extends AppCompatActivity
        // TextView no_internet_view = (TextView) findViewById(R.id.no_internet);
        // no_internet_view.setVisibility(View.GONE);
 
+        TextView no_internet_text_view = (TextView)findViewById(R.id.no_internet);
+
         if(isNetworkAvailable()) {
-            Log.v(LOG_TAG, "YES INTERNET");
+           // Log.v(LOG_TAG, "YES INTERNET");
             CourseSyncAdapter.syncImmediately(this);
             spinner.setVisibility(View.VISIBLE);
+            no_internet_text_view.setVisibility(View.GONE);
 
         }else{
-            Log.v(LOG_TAG, "NO INTERNET");
-            TextView no_internet_text_view = (TextView)findViewById(R.id.no_data);
-            no_internet_text_view.setText("No Internet Connection");
+         //   Log.v(LOG_TAG, "NO INTERNET");
+            spinner.setVisibility(View.GONE);
+            no_internet_text_view.setVisibility(View.VISIBLE);
         }
 
    /*     Intent alarmIntent = new Intent(this, CourseService.AlarmReceiver.class);
@@ -291,14 +293,16 @@ public class MainActivity extends AppCompatActivity
         try{
             ConnectivityManager connectivityManager =
                     (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-            //TODO check other valid connections
-            //TODO not working checking for networkaz
             NetworkInfo netInfo =
-                    connectivityManager.getActiveNetworkInfo();
+                    connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
             if(netInfo != null && netInfo.getState() == NetworkInfo.State.CONNECTED){
                 return true;
             }
-            return true;
+            netInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+            if(netInfo != null && netInfo.getState() == NetworkInfo.State.CONNECTED){
+                return true;
+            }
+            return false;
         }catch (Exception e){
             return false;
         }

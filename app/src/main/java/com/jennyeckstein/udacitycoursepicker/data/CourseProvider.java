@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 /**
  * Created by Jenny on 5/10/2016.
@@ -125,11 +124,11 @@ public class CourseProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        Log.v(LOG_TAG, "QUERY");
+     //   Log.v(LOG_TAG, "QUERY");
         Cursor cursor;
         switch(uriMathcher.match(uri)){
             case COURSE:
-                Log.v(LOG_TAG, "COURSE");
+            //    Log.v(LOG_TAG, "COURSE");
                 cursor = courseDBHelper.getReadableDatabase().query(
                         CourseContract.Course.TABLE_NAME,
                         null,
@@ -142,7 +141,7 @@ public class CourseProvider extends ContentProvider {
             break;
 
             case COURSE_WITH_ID:
-                Log.v(LOG_TAG, "COURSE WITH ID");
+               // Log.v(LOG_TAG, "COURSE WITH ID");
                 cursor = courseDBHelper.getReadableDatabase().query(
                         CourseContract.Course.TABLE_NAME,
                         null,
