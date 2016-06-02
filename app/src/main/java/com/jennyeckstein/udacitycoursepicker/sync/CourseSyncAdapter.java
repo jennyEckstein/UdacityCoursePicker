@@ -7,6 +7,7 @@ import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SyncRequest;
 import android.content.SyncResult;
 import android.database.Cursor;
@@ -45,9 +46,22 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
     public static final int SYNC_INTERVAL = 60 * 720;
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL/3;
 
+    public static final String ACTION_DATA_UPDATED =
+            "android.appwidget.action.APPWIDGET_UPDATE";
+
+
     public CourseSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
         this.coursesMap = new HashMap<>();
+    }
+
+    private void updateWidgets() {
+        Context context = getContext();
+        // Setting the package ensures that only components in our app will receive the broadcast
+        Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED)
+                .setPackage(context.getPackageName());
+        context.sendBroadcast(dataUpdatedIntent);
+        Log.v(LOG_TAG, "UPDATED WIDGET");
     }
 
     /**
@@ -293,6 +307,9 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
                 inserted = getContext().getContentResolver().bulkInsert(CourseContract.Course.CONTENT_URI, courseArray);
                 Log.v(LOG_TAG, "INSERTED" + ": " + String.valueOf(inserted));
             }
+
+            updateWidgets();
+
 
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);

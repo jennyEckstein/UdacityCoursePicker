@@ -1,7 +1,9 @@
-<resources>
+<resources
+    >
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"
+        >
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -79,7 +81,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginBottom">10dp</item>
-        <item name="tools:text">Course Name Title</item>
+       <!-- <item name="tools:text">Course Name Title</item>-->
     </style>
 
     <style name="Udacity_Detail_Headers">
@@ -111,6 +113,6 @@
     <style name="Udacity_Detail_Text_Lots">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="tools:text">@string/lorem_ipsum</item>
+        <!--<item name="tools:text">@string/lorem_ipsum</item>-->
     </style>
 </resources>

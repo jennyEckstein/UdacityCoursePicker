@@ -76,6 +76,19 @@
                 android:resource="@xml/syncadapter" />
         </service>
 
+        <service android:name=".widget.CourseWidgetIntentService">
+
+        </service>
+
+
+<receiver android:name=".widget.CourseAppWidgetProvider">
+    <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+        <action android:name="com.example.android.app.ACTION_DATA_UPDATED" />
+    </intent-filter>
+    <meta-data android:name="android.appwidget.provider"
+        android:resource="@xml/course_widget"/>
+</receiver>
     </application>
 
 </manifest>
