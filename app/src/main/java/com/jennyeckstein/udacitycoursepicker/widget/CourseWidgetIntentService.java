@@ -26,7 +26,6 @@ public class CourseWidgetIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.v(LOG_TAG, "UPDATED WIDGET");
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
                 new ComponentName(
@@ -52,9 +51,7 @@ Log.v(LOG_TAG, "CURSOR RETURNER");
         }
 
         int numberOfNewCourses = cursor.getCount();
-        Log.v(LOG_TAG, "UPDATED WIDGET # " + numberOfNewCourses);
         for(int appWidgetId: appWidgetIds){
-            Log.v(LOG_TAG, "APP ID widget");
             int layoutId = R.layout.course_appwidget;
             RemoteViews views = new RemoteViews(getPackageName(), layoutId);
 
