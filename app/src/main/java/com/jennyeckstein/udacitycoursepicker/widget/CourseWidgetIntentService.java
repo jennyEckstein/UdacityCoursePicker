@@ -6,7 +6,6 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.database.Cursor;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.jennyeckstein.udacitycoursepicker.MainActivity;
@@ -40,7 +39,6 @@ public class CourseWidgetIntentService extends IntentService {
                 null,
                 null
         );
-Log.v(LOG_TAG, "CURSOR RETURNER");
         if(cursor == null){
             cursor.close();
             return;

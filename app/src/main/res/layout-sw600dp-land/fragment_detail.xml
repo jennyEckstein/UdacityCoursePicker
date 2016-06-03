@@ -62,6 +62,7 @@
               <Button
                   android:id="@+id/begin_course"
                   android:theme="@style/Udacity_Detail_Buttons.GO_TO_COURSE"
+                  android:background="@color/colorPrimaryDark"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:layout_weight="1"/>
@@ -69,6 +70,7 @@
               <Button
                   android:id="@+id/share_button"
                   android:theme="@style/Udacity_Detail_Buttons.SHARE"
+                  android:background="@color/colorPrimaryDark"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:layout_weight="1"/>

@@ -61,7 +61,7 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
         Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED)
                 .setPackage(context.getPackageName());
         context.sendBroadcast(dataUpdatedIntent);
-        Log.v(LOG_TAG, "UPDATED WIDGET");
+        //Log.v(LOG_TAG, "UPDATED WIDGET");
     }
 
     /**
@@ -122,8 +122,8 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
             coursesMap.put(cursor.getString(cursor.getColumnIndex(CourseContract.Course.KEY)), 0);
         }
 
-        Log.d(LOG_TAG, "onPerformSync Called.");
-        Log.v(LOG_TAG, "BEGIN JSON DOWNLOAD");
+        //Log.d(LOG_TAG, "onPerformSync Called.");
+        //Log.v(LOG_TAG, "BEGIN JSON DOWNLOAD");
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
@@ -137,7 +137,7 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
             InputStream inputStream = urlConnection.getInputStream();
             StringBuffer buffer = new StringBuffer();
             if (inputStream == null) {
-                Log.v(LOG_TAG, "INPUT STREAM IS EMPTY");
+               // Log.v(LOG_TAG, "INPUT STREAM IS EMPTY");
             }
             reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
@@ -145,7 +145,7 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
                 buffer.append(line + "\n");
             }
             if (buffer.length() == 0) {
-                Log.v(LOG_TAG, "buffer.length() IS EMPTY");
+               // Log.v(LOG_TAG, "buffer.length() IS EMPTY");
             }
             coursesJsonString = buffer.toString();
             //Log.v(LOG_TAG, coursesJsonString);
@@ -153,8 +153,8 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
 
 
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Error", e);
-            Log.v(LOG_TAG, "IOEXCEPTION");
+           // Log.e(LOG_TAG, "Error", e);
+           // Log.v(LOG_TAG, "IOEXCEPTION");
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -258,7 +258,7 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
         try {
             JSONObject courseObject = new JSONObject(jsonString);
             JSONArray jsonArray = courseObject.getJSONArray(COURSES);
-            Log.v(LOG_TAG, "json object");
+           // Log.v(LOG_TAG, "json object");
             Vector<ContentValues> courseVector = new Vector<>(jsonArray.length());
 
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -297,15 +297,15 @@ public class CourseSyncAdapter extends AbstractThreadedSyncAdapter {
                 courseVector.add(courseValues);
                 //Log.v(LOG_TAG, key + " - " + title);
             }}
-            Log.v(LOG_TAG, "BEFORE INSERT");
-            Log.v(LOG_TAG, "VECTOR SIZE " + String.valueOf(courseVector.size()));
+           // Log.v(LOG_TAG, "BEFORE INSERT");
+           // Log.v(LOG_TAG, "VECTOR SIZE " + String.valueOf(courseVector.size()));
 
             int inserted = 0;
             if (courseVector.size() > 0) {
                 ContentValues[] courseArray = new ContentValues[courseVector.size()];
                 courseVector.toArray(courseArray);
                 inserted = getContext().getContentResolver().bulkInsert(CourseContract.Course.CONTENT_URI, courseArray);
-                Log.v(LOG_TAG, "INSERTED" + ": " + String.valueOf(inserted));
+              //  Log.v(LOG_TAG, "INSERTED" + ": " + String.valueOf(inserted));
             }
 
             updateWidgets();
