@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.jennyeckstein.udacitycoursepicker.data.CourseContract;
 
 /**
@@ -28,6 +33,8 @@ public class MainActivityFragment extends Fragment
     private View view;
     private CourseAdapter mCourseAdapter;
     SendBackToMainActivity sendBackToMainActivity;
+
+    private InterstitialAd mInterstitialAd;
 
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
 
@@ -113,10 +120,12 @@ public class MainActivityFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        createAdd();
         mCourseAdapter = new CourseAdapter(getActivity(), null, 0);
         this.view = inflater.inflate(R.layout.fragment_main, container, false);
         ListView listView = (ListView) view.findViewById(R.id.courseView);
         listView.setAdapter(mCourseAdapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -130,8 +139,52 @@ public class MainActivityFragment extends Fragment
                     sendToMain(courseKey);
                 }
 
+                showAdd();
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                    Log.v(LOG_TAG, "LOADED");
+                } else {
+                    Log.v(LOG_TAG, "NOT LOADED");
+                }
             }
         });
+
+
         return view;
+    }
+
+    public View getView(){
+        return this.view;
+    }
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
+    }
+    private void createAdd(){
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.full_page_add_id));
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+                //loadJoke();
+            }
+        });
+    }
+    //SMALL ADD
+    private void showAdd(){
+        AdView mAdView = (AdView) this.view.findViewById(R.id.adView);
+        // Create an ad request. Check logcat output for the hashed device ID to
+        // get test ads on a physical device. e.g.
+        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        mAdView.loadAd(adRequest);
     }
 }
