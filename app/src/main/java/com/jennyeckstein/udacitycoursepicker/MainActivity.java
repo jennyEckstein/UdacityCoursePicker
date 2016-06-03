@@ -162,6 +162,8 @@ public class MainActivity extends AppCompatActivity
       //  Log.v(LOG_TAG, "ON create");
         setContentView(R.layout.activity_main);
 
+        ((MyApplication) getApplication()).startTracking();
+
         this.spinner = (ProgressBar) findViewById(R.id.progressBar1);
 
         if(findViewById(R.id.fragment_detail_container) != null){
