@@ -75,7 +75,7 @@ public class NewCourseFragment extends Fragment implements LoaderManager.LoaderC
         TextView textView = (TextView) getView().findViewById(R.id.no_data);
         if (!data.moveToFirst()){
             textView.setVisibility(View.VISIBLE);
-            textView.setText("No New Courses");
+            textView.setText(getResources().getString(R.string.no_new_courses));
             //   Log.v(LOG_TAG, "SETTING LIKED NONE");
         }else{
             textView.setVisibility(View.GONE);

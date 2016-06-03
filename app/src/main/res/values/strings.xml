@@ -30,5 +30,6 @@
     <string name="short_tab">Short</string>
     <string name="liked_tab">Liked</string>
 
+    <string name="no_new_courses">No New Courses</string>
     <string name="like_description">Like</string>
 </resources>
