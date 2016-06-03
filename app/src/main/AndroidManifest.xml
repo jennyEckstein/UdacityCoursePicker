@@ -16,7 +16,8 @@
         android:icon="@drawable/icon"
         android:logo="@drawable/udacity_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name=".MyApplication">
 
         <meta-data
             android:name="com.google.android.gms.version"
